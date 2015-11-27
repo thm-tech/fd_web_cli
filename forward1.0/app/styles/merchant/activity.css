@@ -1,0 +1,20 @@
+/*灰色*/
+.color-D2D2D2, .color-d2d2d2 {
+    color: #D2D2D2;
+}
+
+/*橘红色*/
+.color-F96B3A, .color-f96b3a {
+    color: #F96B3A;
+}
+
+.m_hr {
+    margin: 4px 0 8px 0;
+    color: #D9D9D9;
+    width: 776px;
+    position: relative;
+    left: -28px;
+    border-color: #D9D9D9;
+    border-width: 1px;
+    top: 1px;
+}

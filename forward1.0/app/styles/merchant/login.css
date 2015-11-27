@@ -1,0 +1,146 @@
+.login_frame{
+    width:400px;
+    margin:0 auto;
+    background-color:#ffffff;
+    border-radius:5px;
+    margin-top:50px;
+    position:relative;
+}
+.login_tab{
+    width:200px;
+    height:40px;
+    background-color:#e9edeb;
+    text-align:center;
+    padding-top:8px;
+    color:#ffffff;
+    font-size:16px;
+}
+.login_tab_head{
+}
+.login_tab_user{
+    position:relative;
+    top:-30px;
+    left:-30px;
+    border-radius:5px 0px 0px 0px;
+    color:#999999;
+}
+.login_tab_mt{
+    position:relative;
+    top:-70px;
+    left:168px;
+    border-radius:0px 5px 0px 0px;
+    color:#999999;
+}
+.input_{
+    position:relative;
+    top:-40px;
+    height:40px;
+    border-radius:0px;
+    width:300px;
+    margin:0 auto;
+}
+.remember_me{
+    color:#666666;
+    position:relative;
+    top:-40px;
+    width:60px;
+    left:33px;
+}
+.forgot_passwd{
+    width:70px;
+    position:relative;
+    top:-60px;
+    left:267px;
+}
+.join_platform{
+    position:relative;
+    top:-60px;
+    left:260px;
+}
+.login_content_mt{}
+.login_content_user{}
+.login_show{
+}
+.login_hide{
+    display:none;
+}
+.login_alert{
+    margin:0px auto;
+    width:400px;
+    margin-top:30px;
+}
+.current_tab{
+    background-color:#43bb6f;
+    color:#ffffff;
+}
+.input_error_info{
+    color:red;
+    position:absolute;
+    top:80px;
+    left:240px;
+}
+
+/* 第三方登陆模块 */
+.third-login {
+    width: auto;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.third-login > a {
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom-width: 0;
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bolder;
+    padding: 7px 20px 10px 20px;
+    box-sizing: border-box;
+    transition: 0.4s ease;
+    position: relative;
+    text-align: center;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    line-height: 45px;
+    outline: none;
+}
+
+.third-login > a:link {
+    border: 1px solid #ffffff;
+    background-position: 140px center;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.third-login > a:visited,
+.third-login > a:hover,
+.third-login > a:active {
+    background-position: 140px center;
+    color: #E0E0E0;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.third-login > a:hover > i {
+    font-size: 25px;
+}
+
+.third-login > .notsupport > i {
+    font-size: 24px;
+}
+
+.third-login > a > i {
+    color: #ffffff;
+    font-size: 22px;
+    transition: 0.2s ease;
+}
+
+.third-login > a:hover > i {
+    color: #ffffff;
+}
+
+/* 第三方登陆模块 END*/

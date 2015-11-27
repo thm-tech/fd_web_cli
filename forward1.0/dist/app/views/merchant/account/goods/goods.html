@@ -1,0 +1,15 @@
+<div class="goods-contain" ng-controller="goodsCtrl">
+    <ul class="goods-list sub-title">
+        <li ng-class="{'active-subnav':curSubnav == 'online'}"><a class="sub-title" href="javascript:void(0)" ng-class="{'a-green':curSubnav == 'online'}" data="online" ng-click="modSubnav($event)">上架商品</a></li>
+        <li ng-class="{'active-subnav':curSubnav == 'offline'}"><a class="sub-title" href="javascript:void(0)" ng-class="{'a-green':curSubnav == 'offline'}" data="offline" ng-click="modSubnav($event)">下架商品</a></li>
+        <li style="position:absolute;left:625px;"><button class="nav-btn" data="publish" ng-click="modSubnav($event)">发布商品</button>
+    </ul>
+        <div id="search-field" style="position:absolute">
+            <form role="form" name="searchForm" id="searchForm" ng-submit="searchGoods()" novalidate>
+                <input type="text" id="search-box" ng-model="searchInput" placeholder="商品名称/条码" />
+                <button type="submit" class="common-icon" id="search-icon"  ng-disabled="searchForm.$invalid">搜索</button>
+            </form>
+        </div>  
+    <div class="cutting-line"></div>
+    <div ng-include="goodsTpl"></div>
+</div>

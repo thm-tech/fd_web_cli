@@ -1,0 +1,73 @@
+﻿<style>
+.col_goodsdes{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#333333;font-size:16px;margin-top:5px;padding-left: 5px;}
+.col_goodsli{height:130px;width:369px;list-style:none;background-color:#fff;float:left;margin-right:10px;margin-bottom:10px;}
+.col_imgdiv{width:130px;height:120px;float:left;margin-left:5px;margin-top:5px;}
+.col_goodspic{width:130px;height:120px;}
+.col_desdiv{width:239px;height:120px;float: right;margin-top: -120px;padding-right:10px;padding-left: 10px;}
+.col_goodsprice{font-size:14px;color:#c5c5c5;padding-left: 5px;}
+.col_promot{padding-left: 5px;}
+.col_goodspromot{color:#ff4646;font-size:24px;width:120px;float:left;}
+.collected{background-position:0 -887px;cursor:pointer;  margin-left:120px;margin-top:8px;}
+.cancelcol{background-position:0 -1052px;cursor:pointer; margin-left:120px;margin-top:8px;  width: 28px;
+  height: 20px;}
+.share{background-position:0 -996px;cursor:pointer;margin-top:-20px;float:right;}
+.col_sharediv1{margin-top: -56px;height: 25px;border: solid 1px;width: 150px;float: right;}
+.bds{width:20px;margin-top:-67px;position: absolute; margin-left: 175px;  border: solid 1px #43bb6f;}
+.bds a{margin-left:3px;font-size: 12px;padding-left: 17px;line-height: 16px;height: 16px;
+  background-image: url(../../../../images/shareicons.png);background-repeat: no-repeat;cursor: pointer;margin: 6px 6px 6px 0;}
+.bds:after{content: ".";visibility: hidden;display: block;height: 0;clear: both;}
+.bds_qzone{background-position: 0 -52px;}
+.bds_sqq{background-position: 0 -2652px;}
+.bds_tsina{background-position: 0 -104px;}
+.bds_weixin{background-position: 0 -1612px;}
+</style>
+
+<div style="width:760px;" ng-controller="CollectCtrl">
+
+
+	<ul ng-repeat="favlist in user.allcolData" >
+
+	<li class="col_goodsli">
+	<div class="col_imgdiv">
+	<img ng-src={{favlist.picList[0]}} class="col_goodspic"/>
+	</div>
+	<div class="col_desdiv">
+	<a class="col_goodsdes">{{favlist.desp}}</a><br><br><br>
+	<a class="col_goodsprice"><s >{{favlist.price}}</s></a></br>
+	<p class="col_promot">
+	<div class="col_goodspromot">{{favlist.promot}}↓</div>
+	<div class="collected common-icon" ng-hide="favlist.ifshow"	ng-click="toggle1($index,favlist.id)" >　　</div>
+	<div class="cancelcol common-icon" ng-show="favlist.ifshow"	ng-click="toggle2($index,favlist.id)"></div>
+	<div ng-mouseenter="bdshare=true" ng-mouseleave="bdshare=false">
+	<div class="share common-icon" >
+	　　
+	</div>
+
+
+	<div class="bdsharebuttonbox bds" ng-show="bdshare" ng-mouseleave="bdshare=false">
+
+	<a href="#" version="1.0" class="bds_qzone qzOpenerDiv" title="分享到QQ空间" ng-click="qzone(favlist.id)" ng-href={{qzonehref}}  target="_blank"></a></br>
+	<a href="#" class="bds_tsina"  title="分享到新浪微博" ng-click="tsina(favlist.id)" ng-href={{tsinahref}}  target="_blank"></a></br>
+	<a href="#" class="bds_weixin"  title="分享到微信" ng-click="weixinshow=true"></a></br>
+	<a href="#" class="bds_sqq qcShareQQDiv"  title="分享到QQ好友" ng-click="sqq(favlist.id)" ng-href={{sqqhref}} target="_blank"></a></br>
+	</div>
+		<div ng-show="weixinshow" style="border:1px solid;width:270px;height:270px;position:absolute;background-color:#fff;margin-left:-40px;">
+			<p><span>分享到微信朋友圈</span>
+			<a ng-click="weixinshow=false" style="cursor:pointer;float:right;">X</a>
+			<div style="width:200px;height:200px;margin:0 auto;">
+			<qrcode data="www.baidu.com" size="200"></qrcode>
+			</div>
+			<p>打开微信，点击底部的“发现”，</p>
+			<p>使用“扫一扫”即可将网页分享至朋友圈。</p>
+		</p>
+
+		</div>
+	</div>
+	</p>
+	</div>
+	</li>
+	</ul>
+
+<p style="margin-bottom:300px;">　</p>
+
+</div>

@@ -1,0 +1,166 @@
+.process-bar {
+    margin:0 auto 50px;
+}
+.process-bar .step {
+    background:none repeat scroll 0% 0% #ececec;
+    display:inline-block;
+    line-height:40px;
+    text-align:center;
+    position:relative;
+    height:40px;
+}
+.process-bar .current {
+    background:none repeat scroll 0% 0% #43bb6f;
+    border-left-color:#43bb6f;
+    color:#fff;
+    height:40px;
+}
+.process-bar .first {
+    border-radius:3px 0px 0px 3px;
+}
+.process-bar .last {
+    border-radius:3px 0px 0px 3px;
+}
+.process-bar .highlight {
+    border-left-color:#fff;
+    right:-21px;
+    position: absolute;
+    top: 0px;
+    width: 0px;
+    height: 0px;
+    border-top: 20px solid transparent;
+    line-height: 0;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #fff;
+}
+.process-bar .current .arrow {
+    border-left-color:#43bb6f;
+}
+.process-bar .arrow {
+    position: absolute;
+    top: 0px;
+    right: -20px;
+    width: 0px;
+    height: 0px;
+    border-top: 20px solid transparent;
+    line-height: 0;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #ECECEC;
+}
+
+.forgot-passwd-frame{
+    background-color:#ffffff;
+    height:400px;
+    padding:10px;
+    margin-bottom:100px;
+    width:920px;
+    margin:10px auto;
+}
+
+.current_dot{
+    background-color:#ffffff;
+    width:30px;
+    height:30px;
+    margin-left:40px;
+    position:relative;
+    border:4px solid #99dab1;
+    top:5px;
+    border-radius:50%;
+    color:#43bb6f;
+}
+
+.tab_font{
+    position:absolute;
+    top:2px;
+    left:90px;
+}
+
+.index_font{
+    line-height:22px;
+    position:absolute;
+    left:7px;
+}
+.next_step_button{
+    position:relative;
+    left:15px;
+}
+.form_frame{
+    position:relative;
+    top:-30px;
+}
+.next_step_button_submit{
+                width:120px;
+                height:30px;
+                background-color:#43bb6f;
+                color:#ffffff;
+                border:0px;
+                border-radius:1px;
+            }
+.grey_dot{
+    background-color:#c6bbbb;
+    border-color:#c6bbbb;
+    color:#999999;
+}
+.tab_font_grey{
+    color:#999999;
+}
+.form_frame{
+    position:relative;
+    top:-30px;
+}
+.show_verify_error{
+    color:#da1111;
+    position:absolute;
+    top:5px;
+    left:330px;
+}
+.get_verity{
+    margin-left:20px;
+    background:transparent;
+    border:0px;
+    color:#43bb6f;
+    margin-top:2px;
+    width:200px;
+    position:relative;
+    top:5px;
+    left:40px;
+}
+.input_verify{
+    height:30px;
+    width:170px;
+    border-radius:1px;
+    position:relative;
+    top:-15px;
+}
+.re_send{
+    position:absolute;
+    top:0px;
+    left:87px;
+    border:1px solid #ccc;
+    border-radius:3px;
+}
+.input_passwd{
+    height:30px;
+    width:125px;
+    border-radius:1px;
+    position:relative;
+}
+.show_info{
+    color:#da1111;
+    position:absolute;
+    top:7px;
+    left:280px;
+}
+.login_direct{
+  display:block;
+  text-align:center;
+  font-size:16px;
+  width:120px;
+  height:30px;
+  background-color:#43bb6f;
+  color:#ffffff;
+  padding:4px;
+  position:relative;
+  left:400px;
+  margin-top:10px;
+}

@@ -1,0 +1,23 @@
+<div class="fd-header login-header">
+    <div class="mm-header login-mm-header">
+    <a href="#/index" id="w-fd-logo">
+        <p id="w-ch-logo">
+            <span>喵喵熊</span>
+            <span>妙生活</span>
+        </p>
+    </a>
+    <a class="r-header" id="bk-main" href="#/index">返回首页</a>
+    </div>
+</div>
+<div class="container" ng-controller="resetPsw">
+    <alert ng-hide="logSucceed" ng-repeat="alert in _alert.alerts" type="{{alert.type}}" close="_alert.closeAlert($index)" ><span>{{alert.msg}}</span></alert>
+  <div class="forgot-passwd-frame">
+    <div style="margin-top:10px;margin-bottom:10px;">
+        <h4 style="display:inline;color:#666666;" class="text-left">找回密码</h4>
+        <a style="float:right;color:#43bb6f;margin-right:5px;" href="#/customer/login">登录</a>
+    </div>
+    <div>
+        <div ng-include="reset.templateUrl"></div>
+    </div> 
+</div>
+

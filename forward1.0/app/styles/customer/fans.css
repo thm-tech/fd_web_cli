@@ -1,0 +1,18 @@
+.fav_ctrl{width:760px;margin-left:8px;}
+.fav_title{height:44px;width:748px;text-align:center;background-color:#fff;line-height:44px;}
+.fav_main{color:#999999;font-size:18px;text-decoration:none;float:left;margin-left:10px;}
+.fav_list{height:110px;width:370px;list-style:none;background-color:#fff;float:left;margin-right:10px;margin-bottom:10px;}
+.fav_picdiv{width:100px;height:100px;float:left;margin-left:5px;margin-top:5px;}
+.fav_name{font-size:16px;color:#333333;cursor:pointer;height:45px;text-overflow:ellipsis;overflow:hidden;}
+.fav_shoppic{width:100px;height:100px;cursor:pointer;}
+.fav_collected{background-position:-10px -357px;cursor:pointer;margin-top:20px;float:right;}
+.fav_cancelcol{background-position:-10px -384px;cursor:pointer;margin-top:20px;width:28px;float:right;}
+.fav_text{width:265px;height:120px;float: right;margin-top:10px;padding-right:10px;padding-left: 10px;}
+.fav_textbelowe{margin-top:20px;color:#f29b76;font-size:14px;}
+.fav_newgoods{background-position:-10px -436px;}
+.fav_promoteact{background-position:-10px -464px;}
+.fav_newtext{ margin-left:-6px;color:#f29b76;}
+.tips{font-size:30px;color:#aaa;text-align:center;}
+.fav_nofav{text-align:center;}
+.fav_hasnew{position:absolute;}
+.fav_hasact{margin-left:80px;position:absolute;}

@@ -1,0 +1,88 @@
+<div  ng-controller="shopsCtrl">
+    <div class="cm-shops-contain" ng-show="user.shopsShow" >
+    <div class="blank-bk" id="filter-header">
+        <div class="city-select"  ng-mouseenter="user.mCity()" ng-mouseleave="user.mCity()">
+            <h4>{{user.curCity.name}}<i class="fa fa-angle-down fa-1x"></i></h4>
+            <ul class="city-list" ng-show="user.cityHover">
+                <li ng-repeat="city in user.cityList"><a ng-click="user.selectCity(city)">{{city.name}}</a></li>
+            </ul>
+        </div>
+        <div id="search-field">
+            <form role="form" name="searchForm" id="searchForm" ng-submit="user.search()" novalidate>
+                <input type="text" id="search-box" ng-model="user.searchInput" placeholder="搜索商店" />
+                <button type="submit" class="common-icon" id="search-icon" ng-disabled="searchForm.$invalid">搜索</button>
+            </form>
+        </div>  
+    </div>
+    <div class="act-area" ng-if="!user.noAct">
+        <div class="act-area-head">
+            <i class="common-icon act-icon-logo"></i>
+            <span class="act-area-title">活动专区</span>
+            <a href="javascript:void(0)" ng-click="user.showActList()">更多&gt;</a>
+        </div> 
+        <div class="act-area-content">
+            <ul class="act-contain">
+                <li ng-repeat="act in user.actList">
+                <img style="vertical-align:top" ng-src="{{act.shopPic}}@220w_160h_1e_0l_1c" width="220" height="160" ng-click="user.showActDet($index)">
+                <div class="act-text">
+                    <h3 class="act-title">
+                        <a title="{{act.title}}" ng-click="user.showActDet($index)">{{act.title}}</a>
+                    </h3>
+                    <a class="common-icon send-friend-icon" style="top:190px;right:0" title="发送活动" ng-click="user.sendAct(act.actID,act.title,act.shopPic)"></a>
+                    <span class="act-shop-name" title="{{act.shopName}}">【{{act.shopName}}】</span>
+                </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="cm-shops-area">
+        <div class="cm-shop-area" ng-repeat="shop in user.allshopsData" repeat-emit>
+            <div class="shop-head">
+                <span class="shop-title" title="{{shop.shop_name}}">{{shop.shop_name}}</span>
+                <span class="shop-deal">
+                <a class="common-icon send-friend-icon" title="发送商店" ng-click="user.sendShop(shop.shop_id,shop.shop_name)"></a>
+                <a class="fa fa-arrow-right fa-2x into-shop-icon" style="font-size:1.3em" title="进入商店" ng-click="user.intoShop(shop.shop_id,shop.shop_name,shop.isFans,$index)" ></a>
+                </span>
+            </div>
+            <div class="home-goods-display">
+                <ul class="home-goods-contain">
+                    <li  ng-repeat="goods in shop.goods track by $index">
+                    <img src="" width="240" height="240px" ng-click="user.showGoods(goods.id,shop.shop_id,shop.shop_name,shop.isFans,$parent.$index)" lazy-load="{{goods.pic}}@240w_240h_1e_0l_1c" data="3"/>
+                        <span class="common-icon new-goods-icon" style="top:0;left:0" ng-if="goods.newGoods"></span>
+                        <div class="goods-text" style="display:none" ng-doimg>
+                            <span class="goods-name1" title="{{goods.name}}">{{goods.name}}</span>
+                            <span ng-if="goods.promot" class="price">{{goods.price | currency:'￥'}}</span>
+                            <span ng-if="!goods.promot" class="pro-price">{{goods.price | currency:'￥'}}</span>
+                            <span ng-if="goods.promot" class="pro-price">{{goods.promot | currency:'￥'}}</span>
+                            <span class="common-icon send-friend-icon" style="top:15px;right:0" title="发送商品" ng-click="user.sendGoods(shop.shop_id,goods.id,goods.name,goods.pic)"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div style="clear:both"></div>
+            <div class="shop-foot">
+              <div class="chat-field">
+                <a class="common-icon chat-icon" style="vertical-align:bottom" ng-click="user.intoChat(shop.shop_id,shop.shop_name)"></a>
+                <span>聊天室({{shop.customersNum}})</span>
+              </div>
+              <div class="att-field">
+                  <a class="common-icon no-attention-icon" ng-class="{'attention-icon':shop.isFans}" ng-click="user.interest(shop.shop_id,shop.isFans,$index)" style="vertical-align:sub" ></a>
+                <span>关注({{shop.fansNum}})</span>
+              </div>
+            </div>
+        </div>
+        <div class="no-shops-data" ng-if="user.noShops">
+            <p>暂无符合条件的结果</p>
+        </div>
+        <div  class="shops-loading-wrapper" ng-if="user.continueLoading">
+            <span class="load-more-icon" id="shops-loading">载入更多</span>
+        </div>
+        <div class="pagination-wrapper" ng-if="user.showPagi">
+            <pagination total-items="user.shopTotal" first-text="首页" previous-text="上一页" next-text="下一页" last-text="尾页" items-per-page="user.itemsPerPage" ng-click="selectPage(user.curPage)" ng-model="user.curPage" max-size="user.maxSize" class="pagination-md" boundary-links="true"></pagination>
+        </div>
+    </div>
+    </div>
+    <div ng-if="user.showAct && !user.shopsShow" ng-include="'views/customer/account/activity/activity.html'"></div>
+    <div ng-if="user.showShop && !user.shopsShow" ng-include="'views/customer/account/shopDel/shopDel.html'" ></div>
+</div>
+

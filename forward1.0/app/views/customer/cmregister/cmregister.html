@@ -1,0 +1,47 @@
+<style>
+    .reg-input {
+        width:300px;
+        height:40px;
+        margin:0 auto;
+        border-radius:0px;
+    }
+</style>
+<div class="fd-header login-header">
+    <div class="mm-header login-mm-header">
+    <a href="#/index" id="w-fd-logo">
+        <p id="w-ch-logo">
+            <span>喵喵熊</span>
+            <span>妙生活</span>
+        </p>
+    </a>
+    <a class="r-header" id="bk-main" href="#/index">返回首页</a>
+    </div>
+</div>
+<div class="container" ng-controller="cmregisterCtrl">
+    <alert class="login_alert" ng-hide="regSucceed" ng-repeat="alert in _alert.alerts" type="{{alert.type}}" close="_alert.closeAlert($index)" ><span>{{alert.msg}}</span></alert>
+    <div class="row login_frame" style="height:310px;border:1px solid #ccc;padding:30px;margin-bottom:100px;">
+        <div style="text-align:right;margin-bottom:20px">
+            <a href="#/customer/login" style="color:#63ca89">登录</a>
+        </div>
+          <div>
+                <form class="form-horizontal" name="registerForm" id="registerForm" role="form" ng-submit="user.register()" novalidate>
+                    <div class="form-group">
+                        <input type="text" class="form-control reg-input" name="mphone" id="mphone" ng-model="user.mphone" ng-focus="user.rmMsg()" ng-blur="user.analysePho()" placeholder="手机号码" required/>
+                        <span ng-if="user.errPho" style="position: absolute;top: 80px;left: 220px;color: #EA1B1B;" >{{user.errPhoMsg}}</span>
+                    </div>
+                    <div class="form-group">
+                            <input type="text" class="form-control reg-input" style="margin-left:34px;width:200px;display:inline-block" name="secCode" id="secCode" ng-model="user.code"  placeholder="手机验证码" required />
+                            <input ng-hide="user.clicked" type="button" class="btn btn-sm btn-default" style="display:inline-block;margin-left:14px;" ng-click="user.getCode()" value="获取验证码" />
+                            <input ng-show="user.clicked" type="text" class="re_send" style="position:relative;left:0px;width:90px;height:29px;text-align:center;margin-left:10px;" ng-model="user.reSend" disabled />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control reg-input" name="password"  ng-minlength="6" ng-model="user.password"  placeholder="密码6-32位" required />
+                        <span ng-show="registerForm.password.$error.minlength" style="position: absolute;top: 190px;left: 265px;color: #EA1B1B;">密码至少6位</span>
+                    </div>
+                  <div class="form-group" style="text-align:center">
+                          <input type="submit" style="background-color:#43bb6f;border:0px;" ng-disabled="registerForm.$invalid || user.codeErr || user.errPho" class="btn btn-primary reg-input" value="注册" />
+                  </div>
+                </form>
+            </div>
+        </div> 
+</div>

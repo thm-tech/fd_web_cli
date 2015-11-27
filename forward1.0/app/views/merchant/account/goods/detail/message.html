@@ -1,0 +1,12 @@
+
+        <form name="noticeForm" role="form" ng-submit="sendNotice()" novalidate> 
+            <div>
+                <div class="notice-cont">
+                    <textarea ckeditor="editorOptions"  name="editor" placeholder="{{sendMsg.remind}}" ng-model="sendMsg.letter" ></textarea>
+                </div>
+            </div>
+            <span>{{sendMsg.remind}}</span>
+            <button type="submit" class="submit-btn" ng-disabled="noticeForm.$invalid || emptySend || emptyFans" style="position:absolute;right:50px;top:580px">
+                发送
+            </button>
+        </form>

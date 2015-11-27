@@ -1,0 +1,13 @@
+<div  ng-controller="PartnerCtrl" class="partner_body">
+
+<h2 class="partner_join">入驻商家</h2>
+<ul class="partner_float">
+<li class="partner_float" ng-repeat="shop in shopinfo">
+<div ng-mouseenter ="shname=true" ng-mouseleave="shname=false">
+<img  class="partner_image"ng-src="{{shop.pic_url}}@200w_134h_0e"  >
+<font class="partner_shopname " ng-show="shname" >{{shop.shop_name}}</font>
+</li>
+</div>
+</ul>
+
+</div>

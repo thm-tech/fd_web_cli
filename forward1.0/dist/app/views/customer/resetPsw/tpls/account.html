@@ -1,0 +1,37 @@
+
+        <ol class="process-bar" style="width:100%">
+            <li class="step current first" style="width:25%;z-index:4">
+                <div class="current_dot"><span class="index_font">1</span></div><span class="tab_font">确认账号</span>
+                <span class="highlight"></span>
+                <span class="arrow"></span>
+            </li><li class="step" style="width:25%;z-index:3"><div class="current_dot grey_dot"><span class="index_font">2</span></div><span class="tab_font tab_font_grey">身份验证</span>
+                <span class="highlight"></span>
+                <span class="arrow"></span>
+            </li><li class="step" style="width:25%;z-index:2"><div class="current_dot grey_dot"><span class="index_font">3</span></div><span class="tab_font tab_font_grey">重置密码</span>
+                <span class="highlight"></span>
+                <span class="arrow"></span> 
+            </li><li class="step last" style="width:25%;z-index:1"><div class="current_dot grey_dot"><span class="index_font">4</span></div><span class="tab_font tab_font_grey">修改完成</span></li>
+        </ol>
+        <!--span style="color:#666666;position:relative;top:-40px;">请填写需要找回的账号</span-->
+        <form class="form-horizontal form_frame" name="accountForm" id="accountForm" role="form" ng-submit="reset.account.postAccount()" novalidate>
+          <div class="form-group">
+            <div class="col-md-8">
+                <input type="text" class="form-control" style="width:290px;height:30px;border-radius:1px;" name="account" id="account" ng-blur="reset.account.accountBlur()" ng-focus="reset.account.accountFocus()" ng-model="reset.account.account" placeholder="账号/手机号" required />
+                <span ng-show="accountForm.account.$dirty && accountForm.account.$error.required || reset.account.accountblur" 
+                    style="color:#da1111;position:absolute;top:6px;left:330px;">请填写账号/手机号</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-8">
+                <input type="text" class="form-control" style="width:120px;height:30px;float:left;border-radius:1px;" name="captcha" id="captcha" ng-blur="reset.account.captchaBlur()" ng-focus="reset.account.captchaFocus()" ng-model="reset.account.captcha" ng-change="reset.account.verityCaptcha()" placeholder="输入验证码" required />
+                <img ng-src="{{reset.account.imgCaptchaUrl}}" style="float:left;margin-left:10px;margin-right:10px;"></img>
+                <a ng-click="reset.account.changeCaptcha()" style="float:left;cursor:pointer;font-size:14px;color:#43bb6f;margin-top:5px;">换一张</a>
+                <span ng-show="accountForm.captcha.$dirty && accountForm.captcha.$error.required || reset.account.captchablur" class="show_verify_error">请填写验证码</span>
+                <span class="show_verify_error" ng-show="reset.account.errCap">验证码输入错误</span>
+                <!--<div re-captcha ng-model="user.captcha"></div>-->
+            </div>
+          </div>
+          <div class="form-group next_step_button">
+            <input type="submit" style="background-color:#43bb6f;" ng-disabled="accountForm.$invalid || reset.account.errCap || reset.account.captcha.length < 4" class="next_step_button_submit btn btn-primary" value="下一步" />
+          </div>
+        </form>

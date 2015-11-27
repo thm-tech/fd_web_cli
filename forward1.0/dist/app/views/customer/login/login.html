@@ -1,0 +1,77 @@
+<div class="fd-header login-header">
+    <div class="mm-header login-mm-header">
+        <a href="#/index" id="w-fd-logo">
+            <p id="w-ch-logo">
+                <span>喵喵熊</span>
+                <span>妙生活</span>
+            </p>
+        </a>
+        <a class="r-header" id="bk-main" href="#/index">返回首页</a>
+    </div>
+</div>
+<div class="container" ng-controller="cmLoginCtrl">
+    <alert class="login_alert" ng-hide="logSucceed" ng-repeat="alert in _alert.alerts" type="{{alert.type}}"
+           close="_alert.closeAlert($index)"><span>{{alert.msg}}</span></alert>
+    <div class="row login_frame" style="height:310px;border:1px solid #ccc;padding:30px;margin-bottom:100px;">
+        <div class="login_tab_head">
+            <div class="login_tab_user login_tab current_tab">
+                <label class="text-center">用户</label>
+            </div>
+            <div class="login_tab_mt login_tab" ng-click="changeLoginTab()">
+                <label class="text-center">商家</label>
+            </div>
+        </div>
+
+        <div class="login_content_mt">
+            <form class="form-horizontal" name="loginForm" id="loginForm" role="form" ng-submit="userInfo.login()"
+                  novalidate>
+                <div class="form-group">
+                    <input type="text" class="form-control input_" name="username" id="username"
+                           ng-model="userInfo.name" placeholder="手机" required/>
+                    <span class="input_error_info"
+                          ng-show="loginForm.username.$dirty && loginForm.username.$error.required">请填写手机号</span>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control input_" name="passwd" id="passwd"
+                           ng-model="userInfo.passwd" placeholder="密码" required/>
+                    <span class="input_error_info" style="top:135px;"
+                          ng-show="loginForm.passwd.$dirty && loginForm.passwd.$error.required">请填写用户密码</span>
+                </div>
+                <div class="form-group">
+                    <div class="remember_me">
+                        <input type="checkbox" id="remember" ng-click="rememberMe()" ng-model="remember"><span
+                            style="margin-left:5px">记住我</span>
+                    </div>
+                    <div class="forgot_passwd">
+                        <a href="#/customer/resetPsw" style=""><span style="color:#43bb6f">忘记密码?</span></a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit"
+                           style="position:relative;left:33px;top:-60px;background-color:#43bb6f;border:0px;"
+                           ng-disabled="loginForm.$invalid" class="btn btn-primary input_" value="登录"/>
+                </div>
+                <span id="qqLoginBtn"></span>
+            </form>
+            <div class="join_platform" style="left:285px">
+                <a href="#/customer/cmregister" style=""><span style="color:#43bb6f">注册</span></a>
+            </div>
+        </div>
+        <div style="color: #999999; text-align: center;position:relative;top: -10px;">第三方账号快速登录</div>
+        <div class="third-login row">
+            <a href="http://openapi.qzone.qq.com/oauth/show?which=ConfirmPage&display=pc&client_id=101243441&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fapi.immbear.com%2Fuserweb%2Fqq%2Flogincallback"
+               class="pull-left col-sm-4" style="background-color: #68a5e0">
+                <i class="fa fa-qq"></i>
+            </a>
+            <!--
+            <a href="javascript:void(0)" class="pull-left col-sm-4" style="background-color: #f56565">
+                <i class="fa fa-weibo"></i>
+            </a>
+            -->
+            <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wxe4a8a76947f4d2af&redirect_uri=http%3A%2F%2Fwww.immbear.com%2F%23%2Fcustomer%2Faccount%2Fshops&response_type=code&scope=snsapi_login&state=3d6be0a4035d839573b04816624a415e#wechat_redirect" class="pull-left col-sm-4 notsupport"
+               style="background-color: #8dc81b">
+                <i class="fa fa-weixin"></i>
+            </a>
+        </div>
+    </div>
+</div>

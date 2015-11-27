@@ -1,0 +1,133 @@
+.act-area {
+    margin-top:6px;
+    width:756px;
+    height:300px;
+    background-color:#fff;
+}
+.act-area-head {
+    height: 40px;
+    padding: 5px;
+    position: relative;
+}
+.act-area-head .act-icon-logo {
+    display:inline-block;
+    width:25px;
+    height:23px;
+    background-position:-10px -1438px;
+    vertical-align:text-bottom;
+}
+.act-area-title{
+    font-size: 18px;
+    color: #666;
+    line-height: 30px;
+}
+.act-area-head a {
+    position:absolute;
+    right: 5px;
+    top:10px;
+    color:#666;
+}
+.act-area-head a:hover {
+    color:#43bb6f;    
+}
+.act-area-content {
+    width: 756px;
+    padding: 5px;
+    border-top: 1px solid #ccc;
+}
+.act-contain {
+
+}
+.act-contain li {
+    position:relative;
+    float:left;
+    margin: 5px 0 0 22px;
+    width: 220px;
+    height:230px;
+    border:1px solid #ddd;
+    overflow: hidden;
+}
+.act-contain li img:hover {
+    cursor:pointer;
+}
+.act-contain .act-text {
+    display:inline-block;
+    width: 220px;
+}
+.act-contain .act-shop-name {
+    display: inline-block;
+    width: 160px;
+    height: 20px;
+    color:#888;
+    text-align:left;
+    font-size:12px;
+    line-height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.act-contain .act-title {
+    padding:8px 2px;
+    width: 200px;
+    font-size: 14px;
+    text-align:left;
+}
+.act-contain .act-title a {
+    display: inline-block;
+    width:200px;
+    line-height: 20px;
+    color: #444;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.act-contain .act-title a:hover {
+    cursor:pointer;
+    text-decoration:underline
+}
+.act-list-display {
+    padding-bottom:20px;
+    float:left;
+    width: 756px;
+    min-height: 600px;
+    background-color: #fff;
+}
+.act-detail-head {
+    width: 756px;
+    height: 44px;
+    background-color: #fff;
+}
+.act-detail-head a {
+    display: inline-block;
+    margin-left:20px;
+    height: 44px;
+    line-height: 44px;
+    color: #666;
+    vertical-align: top;
+}
+.act-detail-head a:hover {
+    cursor:pointer;
+    text-decoration:underline;
+    color:#43bb6f;
+}
+.act-detail-title {
+    display: inline-block;
+    margin-left:10px;
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 44px;
+    font-size: 18px;
+    color: #666;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+.act-detail-contain {
+    padding:20px 0;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    text-align: center;
+}

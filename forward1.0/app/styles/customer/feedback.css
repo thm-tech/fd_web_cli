@@ -1,0 +1,12 @@
+.feed_ctrl{width:1310px;height:640px;background-color:#fff;}
+.feed_main{color:#999999;font-size:18px;text-decoration:none;float:left;margin-left:10px;}
+.feed_title{height:44px;width:748px;text-align:center;background-color:#fff;line-height:44px;}
+.feed_hr{  margin-top: 0;margin-bottom: 0;border: 0;border-top: 1px solid #eee;}
+.feed_textarea{margin-top:18px;resize:none;margin-left:18px;border: 1px solid #dcdcdc;outline: none;width: 1275px;font-size:14px;}
+.feed_send1{height:30px;width:100px;background-color:#dcdcdc;border-radius:5px;border:none;float:right;margin-right:18px;margin-top:10px;color:#fff;}
+.feed_send2{height:30px;width:100px;background-color:#43bb6f;border-radius:5px;border:none;float:right;margin-right:18px;margin-top:10px;color:#fff;}
+.feedc_box{width:300px;height:200px;}
+.feec_mod{padding:5px}
+.feedc_body{padding:10px;height:25px;text-align:center;}
+.feedc_padding{height: 85px;}
+.feedc_foot{padding:10px;}

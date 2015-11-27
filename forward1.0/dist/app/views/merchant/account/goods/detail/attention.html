@@ -1,0 +1,27 @@
+<div>
+        <div class="fans-title-filed">
+            <span class="fans-title">粉丝({{fansInfo.total_num}})</span>
+        </div>
+            <ul class="fans-filed">
+                <li ng-repeat="_fansInfo in fansInfo.fans">
+                <img alt="头像" ng-src="{{_fansInfo.portrait_url}}@30w_30h_0e_1l" />
+                <span class="fans-name" title="{{_fansInfo.name}}">{{_fansInfo.name}}</span>
+                    <div style="margin-top:5px">
+                        <label>逛店次数</label><span>{{_fansInfo.visit_count}}</span>
+                    </div>
+                    <div style="margin-top:5px">
+                        <label>最后逛店时间</label><span>{{_fansInfo.last_visit_time}}</span>
+                    </div>
+                </li>
+            </ul>
+            <ul class="fans-paging">
+                <li>
+                <a class="paging-link" ng-class="{'disabled-paging':noLast}" ng-click="lastPage()">&lt;</a>
+                </li>
+                <li>
+                <a class="paging-link paging-link-last" ng-class="{'disabled-paging':noNext}" ng-click="nextPage()">&gt;</a>
+                </li>
+            </ul>
+        </div>
+
+</div>

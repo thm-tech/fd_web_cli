@@ -1,0 +1,53 @@
+<div>
+    <div class="modal-header mag-modal-header" style="padding:5px">
+        <div class="modal-title">绑定手机</div>
+        <a href="javascript:void(0)" class="close" ng-click="_cancel()"><i class="fa fa-times"></i></a>
+    </div>
+    <div class="modal-body" style="padding:10px">
+        <div class="mag-info-container">
+            <form class="form-horizontal" name="phoneform" novalidate>
+                <div class="form-group">
+                    <label for="input5" class="col-sm-3 control-label mag-control-label pull-left">新手机号</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control mag-form-control" id="input5" placeholder=""
+                               name="newPhone" ng-model="newPhone" ng-pattern="/^\d{11}$/" required>
+                    </div>
+                </div>
+                <p ng-show="phoneform.newPhone.$dirty && phoneform.newPhone.$invalid"
+                   class="text-danger" style="padding-left: 125px;">请输入11位手机号码</p>
+                <div class="form-group">
+                    <label for="input3" class="col-sm-3 control-label mag-control-label pull-left">图片验证码</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control mag-form-control" id="input3" placeholder=""
+                               ng-model="captcha"
+                               name="captcha" ng-change="validcaptcha()" required>
+                    </div>
+                    <img ng-src="{{ captcha_url }}" ng-click="refreshCaptcha()"/>
+                </div>
+                <p ng-show="phoneform.captcha.$dirty && (phoneform.captcha.$invalid || !validsuccess)"
+                   class="text-danger" style="padding-left: 125px;">看不清?换张图试试</p>
+
+                <div class="form-group">
+                    <label for="input4" class="col-sm-3 control-label mag-control-label pull-left">手机验证码</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control mag-form-control" id="input4" placeholder=""
+                               name="phoneCaptcha"
+                               ng-model="phoneCaptcha" ng-change="validPhoneCaptcha()" required>
+                    </div>
+                    <a href="javascript: void(0)" style="line-height: 34px;color: #43BB6F" ng-click="sendPhoneValid()" ng-show="!sended">获取手机验证码</a>
+                    <span ng-show="sended" href="javascript: void(0)" style="line-height: 34px; display: inline-block; color: #43BB6F" ng-model="time">预计等待({{ time }})秒</span>
+                </div>
+                <p ng-show="phoneform.phoneCaptcha.$dirty && (phoneform.phoneCaptcha.$invalid || !phoneValidsuccess) && hasphoneValidsuccess"
+                   class="text-danger" style="padding-left: 125px;">手机验证失败</p>
+            </form>
+        </div>
+    </div>
+    <div style="height: 30px;"></div>
+    <div class="modal-footer" style="padding:10px">
+        <!--<button type="button" class="cancel-btn" ng-click="_cancel()">取消</button>-->
+        <button type="button" class="submit-btn" ng-click="_confirm()" ng-disabled="phoneform.$invalid || !validsuccess || !phoneValidsuccess">确定</button>
+    </div>
+</div>

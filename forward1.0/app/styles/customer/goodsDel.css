@@ -1,0 +1,199 @@
+.goods-detail-contain {
+    padding-bottom:20px;
+    position:relative;
+    background-color:#fff;
+}
+.goods-title {
+    display:inline-block;
+    color:#999;
+    font-size:14px;
+    vertical-align:top;
+}
+.string {
+    display:inline-block;
+    margin-left:5px;
+    width:3px;
+    height:14px;
+    background-color:#f76a08; 
+}
+/*
+.goods-title:before {
+    content:'|';
+    color:#f76a08;
+}
+*/
+.goods-detail-contain .goods-top {
+    position:relative;
+    height:44px;
+    padding:0 10px;
+    border-bottom: 1px solid #ececec;
+}
+.goods-detail-contain .goods-top .goods-name {
+    display: inline-block;
+    width: 200px;
+    line-height: 44px;
+    font-size: 18px;
+    color: #666;
+    font-weight:bold;
+    text-align:left;
+}
+.goods-detail-contain .goods-images-contain {
+    padding:10px 20px;
+}
+.goods-detail-contain .price-del {
+    text-align:center;
+}
+.goods-detail-contain .price-del .price {
+    color:#999;
+}
+.goods-detail-contain .price-del .pro-price {
+
+}
+.goods-detail-contain .goods-name {
+    text-align:center;
+    color:#333;
+}
+.no-collect-icon {
+    display: inline-block;
+    background-position: -4px -844px;
+    width: 25px;
+    height: 25px;
+    vertical-align: text-bottom;
+}
+.goods-detail-contain .deal-goods {
+    position:relative;
+    height:40px;
+}
+.goods-top .collect-goods {
+    display: inline-block;
+    margin-left:10px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+}
+.goods-top .collected {
+}
+.goods-top .collected i {
+    background-position:-4px -816px;    
+} 
+.goods-top .croom {
+    margin-left:15px;
+    cursor:pointer;
+    color:#666;
+}
+.goods-top .into-shop {
+    display:inline-block;
+    margin-left:150px;
+    height:44px;
+    line-height:44px;
+    color:#666;
+    cursor:pointer;
+    vertical-align:bottom;   
+}
+.goods-top .into-shop:hover {
+    color:#43bb6f;
+    text-decoration:underline;
+}
+.goods-top .send-friend {
+    display: inline-block;
+    position:absolute;
+    left:640px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer; 
+}
+.goods-top .send-friend:hover i{
+    background-position:-7px -952px;
+}
+.goods-top .send-friend .send-friend-icon {
+    position:static;
+    width: 20px;
+    height: 25px;
+    background-position: -7px -978px;
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+.goods-detail-contain .goods-info-contain {
+    margin-top:20px;
+}
+.goods-info-contain .goods-info {
+    margin: 5px 0 0 10px;
+    color: #666;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+}
+.goods-info span {
+    display: inline-block;
+    width: 400px;
+    word-break: break-all;
+    vertical-align: top;
+}
+.goods-detail-contain .goods-cus-show {
+    width:763px;
+    margin:30px 0;
+    float:left;
+}
+.goods-cus-show .cus-img-wrapper {
+    position:relative;
+    margin-top: 10px;
+}
+.goods-cus-show .cus-img-wrapper .cus-img-item {
+    float:left;
+    margin: 0 6px 10px 0;
+    border: 4px solid #fff;
+    padding: 4px;
+}
+.goods-cus-show .cus-img-wrapper .cus-img-item:hover {
+    cursor:url(https://img.alicdn.com/tps/i1/T1nTBDFCRbXXbzTk_b-25-20.png),url(https://assets.alicdn.com/img/common/zoom_in.cur),auto;
+}
+.goods-cus-show .cus-img-wrapper .cur-item {
+    border: 4px solid #f76120;
+}
+.goods-cus-show .cus-img-wrapper .cur-item:hover {
+    cursor:url(https://img.alicdn.com/tps/i1/T1oq4AFupvXXcu5FDa-20-20.png),url(https://assets.alicdn.com/img/common/zoom_out.cur),auto;
+}
+.widget-carousel {
+    position: fixed;
+    top: 100px;
+    width: 756px;
+    padding:20px 0;
+    text-align: center;
+    background-color: rgba(207, 249, 224, 1);
+}
+.widget-carousel img {
+    cursor:url(https://img.alicdn.com/tps/i1/T1oq4AFupvXXcu5FDa-20-20.png),url(https://assets.alicdn.com/img/common/zoom_out.cur),auto;
+}
+.view-navleft {
+    position: absolute;
+    width:30%;
+    height:100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    cursor: url(http://s0.meituan.net/fecore/w-carousel/assets/skins/img/cursor-rate-pic-prev.v819e03bc.png),url(http://s1.meituan.net/fecore/w-carousel/assets/skins/img/cursor-rate-pic-prev.cur),auto;
+}
+.view-navright {
+    position: absolute;
+    width:30%;
+    height:100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    cursor: url(http://s1.meituan.net/fecore/w-carousel/assets/skins/img/cursor-rate-pic-next.v7c48f9ee.png),url(http://s1.meituan.net/fecore/w-carousel/assets/skins/img/cursor-rate-pic-next.cur),auto;
+}
+.default-cur {
+    cursor:default;
+}
+.no-cus-fit {
+    height: 100px;
+    padding: 40px;
+    text-align: center;
+}
+.no-cus-fit p {
+    font-size:30px;
+    color:#ccc
+}

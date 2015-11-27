@@ -1,0 +1,33 @@
+
+        <ol class="process-bar" style="width:100%">
+            <li class="step first" style="width:25%;z-index:4">
+                <div class="current_dot grey_dot"><span class="index_font">1</span></div><span class="tab_font tab_font_grey">确认账号</span>
+                <span class="highlight"></span>
+                <span class="arrow"></span>
+            </li><li class="step" style="width:25%;z-index:3"><div class="current_dot  grey_dot"><span class="index_font">2</span></div><span class="tab_font tab_font_grey">身份验证</span>
+                <span class="highlight"></span>
+                <span class="arrow"></span>
+            </li><li class="step current" style="width:25%;z-index:2"><div class="current_dot"><span class="index_font">3</span></div><span class="tab_font">重置密码</span>
+                <span class="highlight"></span>
+                <span class="arrow"></span> 
+            </li><li class="step last" style="width:25%;z-index:1"><div class="current_dot grey_dot"><span class="index_font">4</span></div><span class="tab_font tab_font_grey">修改完成</span></li>
+        </ol>
+        <!--span style="position:relative;top:-40px;color:#666666;">您要找回的账号:{{}}</span-->
+        <form class="form-horizontal form_frame" name="resetForm" id="resetForm" role="form" ng-submit="reset.resetPsw.postReset()" novalidate>
+          <div class="form-group">
+            <div class="col-md-8">
+                <input type="password" class="form-control input_passwd" style="width:240px;" name="newPsw" id="newPsw" ng-blur="reset.resetPsw.newBlur()" ng-focus="reset.resetPsw.newFocus()" ng-model="reset.resetPsw.newPsw" placeholder="新密码" required />
+                <span ng-show="resetForm.newPsw.$dirty && resetForm.newPsw.$error.required || reset.resetPsw.newblur" class="show_info">请填写新密码</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-8">
+                <input type="password" class="form-control input_passwd" style="width:240px;" name="rePsw" id="rePsw" ng-blur="reset.resetPsw.reBlur()" ng-focus="reset.resetPsw.reFocus()" ng-model="reset.resetPsw.rePsw" placeholder="确认新密码" required />
+                <span ng-show="resetForm.rePsw.$dirty && resetForm.rePsw.$error.required || reset.resetPsw.refocus"  class="show_info">请确认新密码</span>
+                <span ng-show="reset.resetPsw.incons" class="show_info">两次密码输入不一致</span>
+            </div>
+          </div>
+          <div class="form-group next_step_button">
+                <input style="background-color:#43bb6f;position:relative;" type="submit" ng-disabled="resetForm.$invalid" class="next_step_button_submit btn btn-primary" value="提交" />
+          </div>
+        </form>

@@ -1,0 +1,46 @@
+﻿<style>
+.fav_title{height:44px;width:748px;text-align:center;background-color:#fff;line-height:44px;}
+.fav_main{color:#999999;font-size:18px;text-decoration:none;float:left;margin-left:10px;}
+.fav_list{height:110px;width:370px;list-style:none;background-color:#fff;float:left;margin-right:10px;margin-bottom:10px;}
+.fav_picdiv{width:100px;height:100px;float:left;margin-left:5px;margin-top:5px;}
+.fav_name{font-size:18px;color:#333333;}
+.fav_namea:link, .fav_namea:visited, .fav_namea:hover, .fav_namea:active {color: #333333;}
+.fav_shoppic{width:100px;height:100px;}
+.fav_collected{background-position:0 -326px;cursor:pointer;margin-top:-20px;float:right;}
+.fav_cancelcol{background-position:0 -353px;cursor:pointer;margin-top:-20px;width:28px;float:right;}
+.fav_text{width:265px;height:120px;float: right;margin-top:10px;padding-right:10px;padding-left: 10px;}
+.fav_textbelowe{margin-top:50px;color:#f29b76;font-size:14px;}
+.fav_newgoods{background-position:-5px -381px;}
+.fav_promoteact{background-position:0 -408px;}
+.fav_newtext{ margin-left: -10px;color:#f29b76;}
+</style>
+
+<div style="width:760px;" ng-controller="FavCtrl">
+
+<ul  ng-repeat="favshop in favlist">
+<li class="fav_list">
+<div class="fav_picdiv">
+<a ng-href="1" target="_blank"><img ng-src={{favshop.pic}} class="fav_shoppic"></img></a>
+</div>
+<div class="fav_text">
+<p>
+<span class="fav_name"><a class="fav_namea"ng-href="1" target="_blank">{{favshop.name}}</a></span>
+<div class="fav_collected common-icon" ng-hide="favshop.ifshow"	ng-click="toggle1($index,favshop.id)">　　</div>
+<div class="fav_cancelcol common-icon" ng-show="favshop.ifshow"	ng-click="toggle2($index,favshop.id)">　　</div>
+</p>
+<p class="fav_textbelowe">
+<a target="_blank" ng-show="favshop.hasNew">
+<span class="fav_newgoods common-icon">　　　</span>
+<span class="fav_newtext">新品上架</span>
+</a>
+<!--
+<a ng-href="''+{{favshop.promote}}" target="_blank"   ng-if="favshop.hasAct" style="float:right;">
+<span class="fav_promoteact common-icon">　　</span>
+<span class="fav_newtext">促销活动</span>
+</a>
+-->
+</p>
+</div>
+</li>
+</ul>
+</div>

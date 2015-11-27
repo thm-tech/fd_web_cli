@@ -1,0 +1,120 @@
+
+<div ng-hide="showDetail">
+    <div style="height:487px;margin:23px 28px;float:left">
+    <table class="fd-table">
+        <thead>
+        <tr ng-if="goodsCheckedList.length == 0">
+            <th style="width:30px"><input type="checkbox" ng-click="toggleAll()" ng-checked="goodsCheckedList.length == goods.length" /></th>
+            <th>编号</th>
+            <th>商品名称</th>
+            <th>售价</th>
+            <th>促销价</th>
+            <th>关注度</th>
+            <th style="width:140px">操作</th>
+        </tr>
+        <tr ng-if="goodsCheckedList.length">
+            <th width="30px"><input type="checkbox" ng-click="toggleAll()" ng-checked="goodsCheckedList.length == goods.length" /></th>
+            <th>{{goodsCheckedList.length}}件商品</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th style="width:140px">
+                <a style="display:inline-block;width:40px" href="javascript:void(0)" ng-click="offBatchGoods()" ><span title="批量下架" class="glyphicon glyphicon-save" style="color:#fff" aria-hidden="true"></span></a>
+                <a style="display:inline-block;width:40px" href="javascript:void(0)" ng-click="delBatchGoods(1)"><span title="批量删除" class="glyphicon glyphicon-trash" style="color:#fff" aria-hidden="true"></span></a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="sgoods in goods">
+            <td><input type="checkbox" ng-click="toggleSel(sgoods.goods_id)" ng-checked="goodsCheckedList.indexOf(sgoods.goods_id) > -1" /></td>
+            <td>{{sgoods.index}}</td>
+            <td title="{{sgoods.description}}">{{sgoods.description}}</td>
+            <td>{{sgoods.price}}</td>
+            <td>{{sgoods.promotion_price}}</td>
+            <td>{{sgoods.favorite_num}}</td>
+            <td>
+                <a href="javascript:void(0)" ng-click="offGoods(sgoods.goods_id)" ><span title="下架商品" class="glyphicon glyphicon-save" aria-hidden="true"></span></a>
+                <a href="javascript:void(0)" ng-click="delGoods(sgoods.goods_id,1)"><span title="删除商品" class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                <a href="javascript:void(0)" ng-click="getDetail(sgoods,1)"><span title="商品详情" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    </div>
+     <div class="paging">
+
+            <ul class="pagination-tb inline-block" style="margin:0 auto;float:left">
+                <li>
+                    <a href="javascript:void(0)" aria-label="Previous" ng-click="init(1,1)">
+                        <span aria-hidden="true">首页</span>
+                    </a>
+                </li>
+                <li ng-class="{disabled: page.current_page-1 == 0}">
+                    <a href="javascript:void(0)" aria-label="Previous" ng-click="init(page.current_page-1,1)">
+                        <span aria-hidden="true">&lt;</span>
+                    </a>
+                </li>
+                <li ng-repeat="index in page.plist" ng-class="{active:is_current(index)}">
+                    <a href="javascript:void(0)" class="m_color_green" ng-click="init(index,1)">{{ index }}</a></li>
+                <li ng-class="{disabled: page.current_page == page.page_num}">
+                    <a href="javascript:void(0)" aria-label="Next" ng-click="init(page.current_page+1,1)">
+                        <span aria-hidden="true">&gt;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" aria-label="Previous" ng-click="init(page.page_num,1)">
+                        <span aria-hidden="true">尾页</span>
+                    </a>
+                </li>
+            </ul>
+            <div style="display:inline-block;float:left">
+                共<span style="color:#55d484" ng-bind="page.page_num"></span>页
+                &nbsp;
+                <form style="display:inline-block" role="form" ng-submit="paging(1)">
+                第
+                <input type="text" id="page-tx" ng-model="page.pageNum" />
+                页
+                &nbsp;
+                <button type="submit" id="page-submit">确定</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    <div style="position:relative" ng-show="showDetail">    
+    <table  class="fd-table" style="margin:23px 28px 0 28px;border-bottom:0">
+        <thead>
+        <tr>
+            <th style="width:50px">编号</th>
+            <th>商品名称</th>
+            <th>售价</th>
+            <th>促销价</th>
+            <th>关注度</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{goodsInfo.index}}</td>
+            <td title="{{goodsInfo.description}}">{{goodsInfo.description}}</td>
+            <td>{{goodsInfo.price}}</td>
+            <td>{{goodsInfo.promotion_price}}</td>
+            <td>{{goodsInfo.favorite_num}}</td>
+            <td>
+                <a href="javascript:void(0)" ng-click="offGoods(goodsInfo.goods_id)" ><span title="下架商品" class="glyphicon glyphicon-save" aria-hidden="true"></span></a>
+                <a href="javascript:void(0)" ng-click="delGoods(goodsInfo.goods_id,1)"><span title="删除商品" class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                <a href="javascript:void(0)" ng-click="backList(1)"><span title="收起" class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></a>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    <div class="goods-detail">
+        <ul class="detail-nav">
+            <li><a class="detail-title" ng-class="{'detail-active': curDetail == 'basic'}" href="javascript:void(0)" ng-click="showBasic(goodsInfo.goods_id)">基本信息</a></li>
+            <li><a class="detail-title" ng-class="{'detail-active': curDetail == 'image'}"href="javascript:void(0)" ng-click="showImg(goodsInfo.goods_id)">商品图片</a></li>
+            <li><a class="detail-title" ng-class="{'detail-active': curDetail == 'attention'}" href="javascript:void(0)" ng-click="showAttention(goodsInfo.goods_id)">关注粉丝</a></li>
+            <li><a class="detail-title" ng-class="{'detail-active': curDetail == 'message'}" href="javascript:void(0)" ng-click="showMessage(goodsInfo.goods_id)">致信粉丝</a></li>
+        </ul>
+        <div class="detail-ctn" ng-include="detailTpl"></div>
+    </div>
+    </div>

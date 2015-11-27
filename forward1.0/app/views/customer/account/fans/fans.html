@@ -1,0 +1,37 @@
+﻿<div class="fav_ctrl" ng-controller="FavCtrl" >
+<div ng-show="user.shopsShow">
+	<div ng-show="nocollect" class="fav_nofav">
+	<span class="tips">您没有关注任何商店</span>
+	</div>
+	<div ng-show="hascollect">
+	<ul>
+	<li class="fav_list" ng-repeat="favshop in favlist">
+	<div class="fav_picdiv" ng-click="user.intoShop(favshop.id,favshop.name,favshop.ifshow,$index)">
+	<img ng-src='{{favshop.pic}}@100w_100h_1e_0l_1c' class="fav_shoppic"></img>
+	</div>
+	<div class="fav_text">
+	<p>
+	<div class="fav_name" onmouseover="this.style.color='#43bb6f';" onmouseout="this.style.color='#333333';" ng-click="user.intoShop(favshop.id,favshop.name,favshop.ifshow,$index)">{{favshop.name}}</div>
+	<div class="fav_collected common-icon" ng-hide="favshop.ifshow"	ng-click="toggle1($index,favshop.id)">　　</div>
+	<div class="fav_cancelcol common-icon" ng-show="favshop.ifshow"	ng-click="toggle2($index,favshop.id)">　　</div>
+	</p>
+	<p class="fav_textbelowe" >
+	<div ng-if="favshop.hasNew" class="fav_hasnew">
+	<span class="fav_newgoods common-icon">　　　</span>
+	<span class="fav_newtext">新品</span>
+	</div>
+	
+	<div ng-if="favshop.hasAct" class="fav_hasact">
+	<span class="fav_promoteact common-icon">　　</span>
+	<span class="fav_newtext">活动</span>
+	</div>
+	
+	</p>
+	</div>
+	</li>
+	</ul>
+	</div>
+</div>	
+<div ng-if="user.showAct" class="col_html" ng-include="'views/customer/account/activity/activity.html'"></div>
+<div ng-if="user.showShop" class="col_html" ng-include="'views/customer/account/shopDel/shopDel.html'" ></div>
+</div>

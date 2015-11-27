@@ -1,0 +1,541 @@
+<div  ng-controller="chatCtrl">
+    <style>
+        .chat{
+            position:relative;
+            width:776px;
+            height:600px;
+            background-color:#ffffff;
+        }
+        .chat_left{
+            width:180px;
+            overflow:auto;
+        }
+        .chat_right{
+            position:absolute;
+            left:180px;
+            top:0px;
+            width:596px;
+        }
+        .chat_left_top{
+            height:40px;
+            width:180px;
+            border-right:1px solid #ececec;
+        }
+        .chat_left_body{
+            width:180px;
+            height:600px;
+            border-right:1px solid #bbb;
+            overflow-y:auto;
+            overflow-x:hidden;
+        }
+        .chat_heart_red{
+            color:#ff0000;
+        }
+        .chat_heart_border{
+            color:#ececec;
+            display:none;
+        }
+        .chat_private_message_tab{
+            border-bottom:1px solid #ececec;
+            width:90px;
+            text-align:center;
+            color:#666666;
+            height:40px;
+        }
+        .chat_private_message_tab_onclick{
+            border-bottom:3px solid #43bb6f;
+            width:90px;
+            text-align:center;
+            color:#43bb6f;
+            height:40px;
+        }
+        .chat_room_tab{
+            position:relative;
+            left:90px;
+            top:-40px;
+            border-bottom:1px solid #ececec;
+            width:90px;
+            text-align:center;
+            color:#666666;
+            height:40px;
+        }
+        .chat_room_tab_onclick{
+            position:relative;
+            left:90px;
+            top:-40px;
+            border-bottom:3px solid #43bb6f;
+            width:90px;
+            text-align:center;
+            color:#43bb6f;
+            height:40px;
+        }
+        li{list-style-type:none;}
+        .chat_user_list{
+            height:60px;
+            width:180px;
+            border-bottom:1px solid #ececec;
+            position:relative;
+            cursor:pointer;
+        }
+        .chat_user_head_left{
+            float:left;
+            width:40px;
+            height:40px;
+            border-radius:50%;
+        }
+        .chat_user_head_right{
+            float:right;
+            width:40px;
+            height:40px;
+            border-radius:50%;
+        }
+        .chat_new_message_dot{
+            float:right;
+            width:12px;
+            height:12px;
+            border-radius:50%;
+            background-color:#ff0000;
+            top:-25px;
+            position:relative;
+            margin-right:10px
+        }
+        .chat_user_name{
+            font-size:16px;
+            color:#333333;
+            position:relative;
+            left:5px;
+        }
+        .chat_message_in_list{
+            font-size:14px;
+            color:#999999;
+            position:relative;
+            left:5px;
+        }
+        .chat_hide_more{
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+        .chat_name_hide_more{
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            width:90px;
+            color:#666666;
+        }
+        .chat_user_info{
+            position:relative;
+            width:176px;
+            top:9px;
+            left:2px;
+            margin-left:5px;
+        }
+        .chat_current_user{
+            background-color:#d9f1e2;
+        }
+        .chat_window_bubble{
+            position:relative;
+            border-width:10px;
+            border-style:dashed solid dashed dashed;
+            border-color:transparent #ffffff transparent transparent;
+            top:-42px;
+            left:1px;
+        }
+        .chat_window_bubble{
+            position:absolute;
+            border-width:10px;
+            border-style:dashed solid dashed dashed;
+            border-color:transparent #ffffff transparent transparent;
+            top:20px;
+            left:160px;
+        }
+        /*
+        .chat_window_bubble_cover{
+            position:relative;
+            border-width:10px;
+            border-style:dashed solid dashed dashed;
+            border-color:transparent black transparent transparent;
+        }
+        */
+        .chat_private_message_users{
+            //display:none;
+        }
+        .chat_room_users{
+        }
+        .chat_heart{
+            position:relative;
+            top:-19px;
+            font-size:16px;
+            float:right;
+            margin-right:10px
+        }
+        .chat_room_user_name{
+            position:relative;
+            top:10px;
+            left:10px;
+        }
+        .chat_show{}
+        .chat_hide{
+            display:none;
+        }
+        .chat_private_message_heart{
+            float:right;
+            position:relative;
+            top:-20px;
+            right:20px;
+        }
+        .ctrl_enter_send{
+            color:#b3adad;
+            left:265px;
+            position:relative;
+        }
+    </style>
+    <div class="chat">
+        <div class="chat_left_body">
+                <ul>
+                    <li ng-repeat="r in chatRoomList track by $index" class="chat_user_list" ng-class="{'chat_current_user':currentRoomName == r}" ng-click="changeCurrentRoom(r);readMessage(r)">
+                        <!--div class="chat_window_bubble" ng-class="{'chat_hide':currentRoomName != r}"></div-->
+                        <div class="chat_user_info">
+                            <img class="chat_user_head_left" src="{{ chatUsers[chatRooms[r].users[0]].userPortrait }}@40w_40h.png"/>
+                            <p ng-if="chatRooms[r].roomType=='shop'" class="chat_user_name chat_name_hide_more">本店聊天室</p>
+                            <p ng-if="chatRooms[r].roomType!='shop'" class="chat_user_name chat_name_hide_more">{{chatUsers[chatRooms[r].users[0]].userName}}</p>
+                            <span class="chat_new_message_dot" ng-class="{false:'chat_hide',true:'chat_show'}[chatRooms[r].haveNewMessage]"></span>
+                            <div class="fa fa-heart chat_private_message_heart" ng-class="{true:'chat_heart_red', false:'chat_heart_border'}[chatUsers[chatRooms[r].users[0]].isFans]"></div>
+                            <p class="chat_message_in_list chat_hide_more">{{getNewestMessage(chatRooms[r])}}</p>
+                        </div>
+                    </li>
+                </ul>
+                <!--div class="chat_left_body_fill"></div-->
+        </div>
+
+        <style>
+            .chat_window{
+                height:420px;
+                border-bottom:1px solid #bbb;
+                overflow-y:auto;
+            }
+            
+            .chat_message_bubble_left{
+                position:relative;
+                border-width:6px;
+                border-style:dashed solid dashed dashed;
+                border-color:transparent #ece transparent transparent;
+                left:40px;
+                top:-12px;
+                float:left;
+            }
+            /*
+            .chat_message_bubble_left_cover{
+                position:relative;
+                border-width:6px;
+                border-style:dashed solid dashed dashed;
+                border-color:transparent #ffffff transparent transparent;
+                left:-2px;
+                top:22px;
+                float:left;
+            }
+            */
+            .chat_input{
+            }
+            .chat_input_text{
+                padding:10px;
+                height:120px;
+                width:596px;
+                border:transparent;
+                border-bottom:1px solid #bbb;
+            }
+            .chat_right_bottom{
+            }
+            .chat_right_bottom_icons{
+                font-size:24px;
+                color:#999999;
+                cursor:pointer;
+            }
+            .chat_right_bottom_left{
+                position:relative;
+                left:10px;
+                top:-37px;
+                width:200px;
+            }
+            .chat_right_bottom_left_img{
+                position:relative;
+                left:20px;
+                width:27px;
+                height:26px;
+                margin-left:20px;
+            }
+            .chat_right_bottom_right{
+                position:relative;
+                top:-20px;
+                left:490px;
+            }
+            .chat_right_bottom_right input{
+                width:100px;
+                height:30px;
+                border:transparent;
+                background-color:#c9c9c9;
+                color:#ffffff;
+            }
+            .chat_right_bottom_right_oninput input{
+                width:100px;
+                height:30px;
+                border:transparent;
+                background-color:#43bb6f;
+                color:#ffffff;
+            }
+            textarea{
+                resize:none;
+            }
+            .chat_show_message_left{
+                height:40px;
+                position:relative;
+                margin:10px;
+            }
+            .chat_message_container_left{
+                padding:5px;
+                position:relative;
+                float:left;
+                max-width:466px;
+                left:40px;
+                top:-20px;
+                //min-height:40px;
+                word-break:break-all;
+                border-radius:5px;
+                color:#BF6464;
+                background-color:#ece;
+            }
+            .chat_show_message_right{
+                height:40px;
+                position:relative;
+                margin:10px;
+            }
+            .chat_message_container_right{
+                padding:5px;
+                position:relative;
+                float:right;
+                max-width:466px;
+                //min-height:40px;
+                background-color:#43bb6f;
+                word-break:break-all;
+                border-radius:5px;
+                left:-35px;
+                top:-20px;
+            }
+            .message_content{
+                max-width:453px;
+            }
+            .chat_message_container_right p{
+                color:#ffffff;
+            }
+            .chat_message_bubble_right{
+                position:relative;
+                float:right;
+                border-width:6px;
+                border-style:dashed dashed dashed solid;
+                border-color:transparent transparent transparent #43bb6f;
+                top:-14px;
+                left:-36px;
+            }
+            .chat_window p{
+                margin:0px;
+                font-size:16px;
+            }
+            .chat_emoji{
+                height:120px;
+                overflow:auto;
+                padding:10px;
+                border-top:1px solid #bbb;
+                border-bottom:1px solid #bbb;
+                background-color:#ffffff;
+                position:absolute;
+                top:300px;
+            }
+            .chat_emoji span{
+                margin:5px 5px 5px 5px;
+            }
+            .chat_right_bottom input{
+                display:inline;
+                opacity:0;
+                width:26px;
+                height:25px;
+                position:relative;
+                top:-22px;
+                left:-4px;
+                cursor:pointer;
+            }
+            .chat_room_members{
+                position:absolute;
+                left:596px;
+                width:180px;
+                height:600px;
+                border-left:1px solid #bbb;
+                overflow-y:auto;
+                overflow-x:hidden;
+                background-color:#ffffff;
+            }
+            .chat_room_member_num{
+                font-size:14px;
+                color:#666666;
+                padding-left:10px;
+                padding-top:12px;
+                height:40px;
+                border-bottom:1px solid #ececec;
+            }
+            .chat_member_info{
+                position:relative;
+                width:176px;
+                top:9px;
+                left:10px;
+            }
+            .chat_member_head_left{
+                float:left;
+                border-radius:50%;
+                width:24px;
+                height:24px;
+            }
+            .chat_room_member_name{
+                position:relative;
+                left:10px;
+                top:2px;
+            }
+            .chat_member_heart{
+                position:relative;
+                font-size:14px;
+                float:right;
+                margin-right:15px;
+                top:-16px;
+            }
+            .chat_member_node{
+                position:relative;
+                height:40px;
+                width:180px;
+                border-bottom:1px solid #ececec;
+            }
+            .chat_send_button{
+                width:100px;
+                height:30px;
+                border:0px;
+                margin:5px;
+                border:3px;
+                color:#ffffff;
+                position:relative;
+                left:485px;
+            }
+            .chat_send_button_green{
+                background-color:#43bb6f;
+            }
+            .chat_send_button_grey{
+                background-color:#999999;
+            }
+            .chat_username_time_right{
+                float:right;
+                color:#b7b4b4;
+                margin-right:10px;
+            }
+            .chat_username_time_left{
+                float:left;
+                color:#b7b4b4;
+                margin-left:10px;
+            }
+            .chat_username_time{
+                max-width:200px;
+                font-size:12px;
+            }
+        </style>
+
+        <div class="chat_right">
+            <!--div class="chat_right_top">
+                <span>采蝶轩黄山路店聊天室</span>
+            </div-->
+            <div class="chat_room_members" ng-class="{true:'chat_show', false:'chat_hide'}[chatRooms[currentRoomName].roomType != 'e2e']">
+                <div class="chat_room_member_num">
+                    <p>正在逛 {{chatRooms[currentRoomName].userNum - 1}}人</p>
+                </div>
+
+                <div class="chat_room_member_list">
+                    <ul>
+                        <li ng-repeat="u in chatRooms[currentRoomName].users" class="chat_member_node">
+                            <div class="chat_member_info ">
+                                <img class="chat_member_head_left" src="{{chatUsers[u].userPortrait}}@40w_40h.jpg"/>
+                                <p class="chat_room_member_name chat_name_hide_more">{{chatUsers[u].userName}}</p>
+                                <div class="fa fa-heart chat_member_heart " ng-class="{true:'chat_heart_red', false:'chat_heart_border'}[chatUsers[u].isFans]"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="chat_window" id="chatwindow">
+                <ul>
+                    <li ng-repeat="m in chatRooms[currentRoomName].messages">
+                        <div ng-class="{false:'chat_show_message_left',true:'chat_show_message_right'}[currentUser == m.user]">
+                            <img ng-class="{false:'chat_user_head_left',true:'chat_user_head_right'}[currentUser == m.user]" src="{{chatUsers[m.user].userPortrait}}@40w_40h.jpg"/>
+                            <div class="chat_hide_more chat_username_time" ng-class="{true:'chat_username_time_right',false:'chat_username_time_left'}[currentUser == m.user]"><span>{{m.time*1000 | date:'MM-dd HH:mm:ss'}}</span>&nbsp;&nbsp;&nbsp;<span>{{chatUsers[m.user].userName}}</span></div>
+                            <div style="clear:both"></div>
+                            <div ng-class="{false:'chat_message_bubble_left',true:'chat_message_bubble_right'}[currentUser == m.user]"></div>
+                            <div  ng-class="{false:'chat_message_container_left',true:'chat_message_container_right'}[currentUser == m.user]">
+                                <img class="message_content" ng-if="m.type == 'image'" src="{{m.trustUrl}}"/>
+                                <p class="message_content" ng-if="m.mtype == 'text'" ng-bind-html="m.m|emoji"></p>
+                                <audio  class="message_content" ng-if="m.type == 'audio'" controls>
+                                <source src="{{m.trustUrl}}" type="{{m.mtype}}">
+                                </audio>
+                                <video  class="message_content" ng-if="m.type == 'video'" controls>
+                                <source src="{{m.trustUrl}}" type="{{m.mtype}}">
+                                </video>
+
+                                <!--div  ng-if="m.mtype == 'mmx/goods'">
+                                    <img src="{{m.m.trustUrl}}@255w.jpg"/>
+                                    <p>{{m.m.name}}</p>
+                                </div>
+
+                                <div  ng-if="m.mtype == 'mmx/shop'">
+                                    <img src="{{m.m.trustUrl}}@255w.jpg"/>
+                                    <p>{{m.m.name}}</p>
+                                </div-->
+                                <div style="cursor:pointer;"  ng-if="m.mtype == 'mmx/goods'">
+                                    <span class="fa fa-bookmark" style="position:absolute;top:1px;font-size:40px;color:rgba(255, 0, 0, 0.66);"></span>
+                                    <span style="position:absolute;top:6px;color:#fff;">商品</span>
+                                    <img src="{{m.m.trustUrl}}@255w.jpg"/>
+                                    <p>{{m.m.name}}</p>
+                                </div>
+
+                                <div  style="cursor:pointer;"   ng-if="m.mtype == 'mmx/shop' || m.mtype == 'mmx/act'">
+                                    <span class="fa fa-bookmark" style="position:absolute;top:1px;font-size:40px;color:rgba(255, 0, 0, 0.66);"></span>
+                                    <span ng-if="m.mtype == 'mmx/shop'" style="position:absolute;top:6px;color:#fff;">商店</span>
+                                    <span ng-if="m.mtype == 'mmx/act'" style="position:absolute;top:6px;color:#fff;">活动</span>
+                                    <img src="{{m.m.trustUrl}}@255w.jpg"/>
+                                    <p>{{m.m.name}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="chat_emoji" ng-class="{true:'chat_show',false:'chat_hide'}[chat_emoji_status == 'chat_emoji_show']">
+                <span ng-repeat="e in current_emojis" ng-bind-html="e|emoji" ng-click="addEmoji(e)"></span>
+            </div>
+
+            <div class="chat_input" ng-click="showEmoji('chat_emoji_hide')">
+                <form ng-keypress="enterKeySendMessage($event)" role="form" ng-submit="sendMessage()">
+                    <!--textarea ng-model="$parent.chatMessage"  class="chat_input_text"></textarea-->
+                    <textarea ng-model="chatMessage"  class="chat_input_text"></textarea>
+                    <input type="submit" value="发送" class="chat_send_button "
+                    ng-class="{true:'chat_send_button_green',false:'chat_send_button_grey'}[chatMessage != '']"/>
+                    <span ng-class="ctrl_enter_send">试试Ctrl+Enter</span>
+                </form>
+            </div>
+            <div class="chat_right_bottom">
+                <div class="chat_right_bottom_left">
+                    <span ng-click="showEmoji('chat_emoji_show')" class="fa fa-smile-o chat_right_bottom_icons" style="position:absolute;"></span>
+                    <span class="fa fa-image chat_right_bottom_icons chat_right_bottom_left_img">
+                        <input  type="file" nv-file-select uploader="uploader"/>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

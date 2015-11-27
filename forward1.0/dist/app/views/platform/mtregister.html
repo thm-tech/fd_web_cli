@@ -1,0 +1,285 @@
+﻿<style>
+.reg_currnum{[;margin-left:11px;]/*safari hack*/}
+.reg_othernum{[;margin-left:11px;]/*safari hack*/}
+</style>
+<!--[if !IE]><!--><script>
+if (/*@cc_on!@*/false) {
+    document.documentElement.className+=' ie10';
+}
+</script><!--<![endif]-->
+
+<div class="reg_bar" ng-controller="mtregisterCtrl">
+<span class="reg_shopjoin">商家入驻</span>
+<!--
+<span class="reg_platshop"><a class="reg_platshop_a" href="#/index/partner" target="_blank">平台入驻商家</a></span><br><br>
+--></br>
+<div class="reg_body"  >
+<div ng-if="regaccount" class="reg_bodyh"><!-- 注册账号页面-->
+<div>
+<ol class="process-bar reg_processbar">
+            <li class="step current reg_pro1"><span class="reg_currimg"><span class="reg_currnum">1</span></span> 注册账号
+                <span class="highlight"></span>
+                <span class="arrow"></span>
+            </li><li class="step reg_pro2"><span class="reg_otherimg"><span class="reg_othernum">2</span></span> 完善信息 
+                <span class="arrow"></span>
+            </li><li class="step reg_pro3"><span class="reg_otherimg"><span class="reg_othernum">3</span></span> 等待审核
+			</li>
+    </ol>
+</div>
+<div >
+<form  class="reg_form1" novalidate name="BCC">
+
+		<div class="reg_form1_a">
+		<label class="reg_lableheight">账号</label>&nbsp;&nbsp;
+		<input class="reg_inputed" type="text" name="account" ng-model="user.account" ng-minlength="6"   ng-required="true" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';"placeholder="字母和数字的组合且不少于6位" remote-validation   ng-pattern="/^[a-zA-Z][^\u4e00-\u9fa5]*$/">
+		<span ng-show="BCC.account.$error.remote" class="reg_infocolor">该账号已经存在</span>
+		<span ng-show="BCC.account.$error.minlength"  class="reg_infocolor">账号长度最少6位</span>
+		<span ng-show="BCC.account.$dirty && BCC.account.$invalid"  class="reg_infocolor">账号必须以字母开头，且不能有汉字,空格</span>
+       	 </div>
+		
+		<div class="reg_pswdtop">
+		<label class="reg_lableheight">密码</label>&nbsp;&nbsp;
+		<input type="password" class="reg_inputed" name="password" ng-model="user.password" ng-minlength="6" ng-required="true"  onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';" placeholder="密码长度为6-32位"> 
+			
+		<span ng-show="BCC.password.$error.minlength" class="reg_infocolor">密码长度最少6位</span>
+
+    	</div>
+        
+       
+        <button class="reg_btnnext reg_btn1" id='next1'  ng-disabled="BCC.$invalid" ng-click="reg()">下一步</button>  
+    	
+</form>
+</div>
+ 
+
+</div><!-- 注册账号页面end -->
+	
+	
+
+<div ng-show="completeinfo" class="reg_page2" > <!--完善信息页面-->
+<div>
+	<ol class="process-bar reg_processbar">
+            <li class="step reg_pro1"><span class="reg_otherimg"><span class="reg_othernum">1</span></span> <a ng-click="reggg()" class="reg_regaccount">注册账号</a>
+                <span class="arrow"></span>
+            </li><li class="step current reg_pro2"><span class="reg_currimg"><span class="reg_currnum">2</span></span> 完善信息 
+                <span class="arrow"></span>
+            </li><li class="step reg_pro3"><span class="reg_otherimg"><span class="reg_othernum">3</span></span> 等待审核
+			</li>
+    </ol>
+</div>
+<div class="reg_form2"  >
+<form  novalidate name="BC">
+		
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight" >姓名</label>
+		</div>
+		<div class="col-sm-8">
+		<input  type="text"  class="reg_inputed" ng-model="contact_name" ng-required="true" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';">
+		</div>
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">*</font><br><br>
+		</div>
+		
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight" >手机</label>
+		</div>
+		<div class="col-sm-5">
+		<input type="text" class="reg_inputed reg_phonew" name="telephone_no" ng-model="telephone_no" ng-required="true" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';" ng-pattern="/^1\d{10}$/">
+		<span ng-show="BC.telephone_no.$invalid && BC.telephone_no.$dirty" class="reg_telinfo">请输入11位手机号</span>
+		</div>
+		<div class="col-sm-3">
+		<button ng-hide="getcap" ng-click="Getcaptcha()" class="reg_getcaptcha">获取验证码</button>
+		<input  ng-show="getcap" type="text" class="reg_getcap"  disabled ng-model="resend"  >
+		</div>
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">*</font> <br><br>
+		</div> 
+     
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight" >验证码</label>
+		</div>
+		<div class="col-sm-8">
+		<input type="text" class="reg_inputed" ng-model="captcha" name="captcha" ng-required="true" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';" check-Captcha>
+		<span ng-show="BC.captcha.$error.captchaa" class="reg_captchaerror">验证码错误</span>
+		
+		</div>
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">*</font><br><br>
+		</div>
+		
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight">品牌名称</label>
+       	</div>
+       	<div class="col-sm-8">
+		<input   type="text" class="reg_inputed" ng-model="brand_name"  onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';">   
+         </div>
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">&nbsp</font><br><br>
+		</div>
+		
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight">主营类别</label>
+       	</div>
+		<div class="col-sm-8" ng-mouseenter="categoryshow=true" ng-mouseleave="categoryshow=false">
+       <button class="reg_catebtn" ng-required="true" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';" > {{category_list}}</button>
+		<div ng-show="categoryshow" class="reg_cateshow">
+		<!--//行业类别开始 -->
+		<div class="tree" >
+		
+		<ul>
+		<li ng-repeat="pcate in cate" ng-class="{closed:pcate.closed}" class="reg_pcate" >
+		<div ng-click="pcate.closed=!pcate.closed">
+		<span class="glyphicon" ng-class="pcate.closed?'glyphicon-minus':'glyphicon-plus'"></span>
+        <a>{{pcate.name}}</a>
+		</div>
+			<ul ng-class="{hidden: !pcate.closed}">
+			<li  class="reg_ccate" ng-repeat="ccate in pcate.son" ng-class="{closed:ccate.closed}">
+			<a  ng-click="choseccates(ccate)">{{ccate.name}}</a>
+			</li>
+			</ul>
+		</li>
+		</ul>
+		
+		</div>
+		<!--//行业类别结束 -->
+		</div>        
+    	</div>
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">*</font><br><br>
+		</div> 
+            
+            
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight" >店面名称</label>
+		</div>
+		<div class="col-sm-8">
+		<input class="reg_inputed" type="text" ng-model="shop_name" ng-required="true" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';">  
+		</div>
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">*</font><br><br>
+		</div>
+     
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight" >营业时间</label>
+		</div>
+		<div class="col-sm-8">
+		<input class="reg_inputed" type="text" ng-model="business_hours" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';" placeholder=" 08:00 - 20:00 "> 
+		</div>
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">&nbsp </font><br><br>
+		</div>
+     
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight" >店面电话</label>
+		</div>
+		<div class="col-sm-8">
+		<input class="reg_inputed" type="text" ng-model="contact_phone_no" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';">  
+		</div>
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">&nbsp </font><br><br>
+		</div>
+		
+	
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight" >城市</label>
+		</div>
+		<div class="col-md-3">
+		<select ng-model="city_id" class="reg_city" ng-options="city.city_id as city.city_name for city in citylist"  ng-required="true" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';" ng-change="changemapcenter()"  > 
+		 
+		</select>
+		</div>
+	
+		
+		<div class="col-sm-2">
+		<label class="pull-right reg_lableheight reg_district">城区</label>
+		</div>
+		<div class="col-sm-3">
+		<select  ng-model="district_id" class="reg_districtt" ng-options="district.district_id as district.district_name for district in districtlist" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';"> 
+		<option value="" style="display:none"></option>
+		</select>
+		</div>
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">*</font><br><br>
+		</div>
+		
+		
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight">商圈</label>
+       	</div>
+       	<div class="col-sm-8">
+		<input class="reg_inputed" type="text" ng-model="business_area" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';">   
+         </div>
+		 <div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">&nbsp</font><br><br>
+		</div>
+		 
+		<div class="col-sm-3">
+		<label class="pull-right reg_lableheight">详细地址</label>
+       	</div>
+       	<div class="col-sm-8">
+		<input class="reg_inputed" type="text" ng-model="address" ng-required="true" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';">   
+        </div>
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar">*</font><br><br>
+		</div>	
+			
+    	<div class="col-sm-3">
+		<label class="pull-right reg_lableheight">地图标注</label>
+       	</div>
+       	<div class="col-sm-8">
+       <input class="reg_inputed" type="text"  readonly  class="reg_maptxt"   ng-model="mapmark" placeholder="请在下方地图点击获得"  onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf';" >
+       </div> 
+		<div class="col-sm-1">			
+		<font size="+1" class="reg_redstar" >&nbsp</font><br><br>
+		</div>
+		
+		<br><br>
+   <button  class="reg_btnnext pull-right" ng-disabled="BC.$invalid" ng-click="regshop()">下一步</button>
+   
+   <br>
+<div class="reg_result" ng-show="user.feedres">注册失败，请检查信息是否有误</div>
+</form>
+
+</div>
+
+<div class="reg_search">
+
+<input type="text" ng-model="position" ng-keypress="enter($event)"/> <button ng-click="mapsearch()">搜索</button>
+</div>
+
+ <div  ui-map='maparea'  ui-map-cache="home" ui-options="mapOptions" class="reg_maparea" ui-event="{'map-click': 'addMarker($event, $params)', 'map-zoomend': 'setZoomMessage(maparea.getZoom())' }" >
+
+</div>
+
+</div>
+	 
+	
+	<div ng-if="waitcheck" class="reg_waitcheck"><!-- 等待审核页面-->
+	<div>
+		<ol class="process-bar reg_processbar" >
+					<li class="step reg_pro1"><span class="reg_otherimg"><span class="reg_othernum">1</span></span> <a ng-click="reggg()" class="reg_regaccount">注册账号</a>
+						<span class="arrow"></span>
+					</li><li class="step reg_pro2"><span class="reg_otherimg"><span class="reg_othernum">2</span></span> 完善信息 
+						<span class="arrow"></span>
+					</li><li class="step current reg_pro3"><span class="reg_currimg"><span class="reg_currnum">3</span></span> 等待审核
+					</li>
+		</ol>
+	</div>
+
+	<div class="reg_waitbody">
+	<img src="../../images/waitcheckright.png" width="100px;">
+
+	<p class="reg_wait_p1">您好，我们会在3个工作日内审核您的入驻申请，并短信通知您审核结果。</p>
+	<p class="reg_wait_p2">审核通过后，我们的工作人员会电话联系您，并上门洽谈签署相应合同。</p>
+	<br>
+	<p class="reg_wait_p3"><b><font>如有任何疑问，请致电：</font><font color="#43bb6f">15155195957</font></b></p>
+	<br>
+
+	<button class="reg_btnnext reg_btn3" ng-click="user.tologin()">完成</button>
+
+	</div>
+	</div>
+
+</div>
+
+</div>

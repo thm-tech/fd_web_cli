@@ -1,0 +1,50 @@
+<div ng-controller="cmaccountCtrl">
+<div class="fd-header login-header">
+    <div class="mm-header login-mm-header">
+    <a id="w-fd-logo">
+        <p id="w-ch-logo">
+            <span>喵喵熊</span>
+            <span>妙生活</span>
+            </p>
+    </a>
+    <ul class="cm-nav">
+        <li class="cm-nav-item" ng-class="{'cm-curnav':curNav == 'shops'}" ng-click="modNav('shops')"><a href="{{curHomeUrl}}">首页</a></li>
+        <li class="cm-nav-item" ng-class="{'cm-curnav':curNav == 'fans'}" ng-click="modNav('fans')"><a href="#/customer/account/fans">粉店</a></li>
+        <li class="cm-nav-item" ng-class="{'cm-curnav':curNav == 'favorite'}" ng-click="modNav('favorite')"><a href="#/customer/account/favorite">收藏</a></li>
+    </ul>
+    <div class="user-msg">
+        <a href="#/customer/account/message" ng-click="modNav('message')">
+            <span class="common-icon msg-icon"></span>
+            <span class="msg-new" ng-show="accountInfo.newMsg.read"></span>
+        </a>
+    </div>
+    <div class="r-header" ng-init="dropMenu=0">
+        <img id="head-img" ng-src="{{accountInfo.portraitUrl}}@35w_35h_0e_1l" />
+        <a id="mm-user" ng-mouseenter="dropMenu=1" ng-mouseleave="dropMenu=0">
+            <span id="nowrap">{{accountInfo.accountName}}</span>
+            <!--            <span class="glyphicon glyphicon-triangle-top"></span>-->
+            <i class="tri-icon"></i>
+        </a>
+        <ul ng-show="dropMenu" ng-mouseenter="dropMenu=1" ng-mouseleave="dropMenu=0" class="dropdown-menu">
+            <!--            <li><a data="setting" href="#/customer/account/friends">我的好友</a></li>
+            <li class="divider"></li>-->
+            <li><a href="#/customer/account/settings" ng-click="modNav('settings')">账号设置</a></li>
+            <li><a href="#/customer/account/feedback" ng-click="modNav('feedback')">在线反馈</a></li>
+            <li class="divider"></li>
+            <li><a href="javascript:void(0)" ng-click="logout()">退出登录</a></li>
+        </ul>
+    </div>
+    </div>
+</div>
+    <div class="cm-contain">
+        <div class="cm-left-contain" ui-view="function"></div>
+        <div class="cm-right-contain" ng-if="loadChat" ng-show="needChat" ui-view="chat"></div>
+    </div>
+    <div class="fixbar-container" >
+        <div class="fixbar-item-top" ng-class="{'show-top':showTop}">
+            <a class="common-icon back-top-icon" href="javascript:void(0)" targettop=".fd-header" scroll-on-click>
+                <!--                <span>回到顶部</span>-->
+            </a>
+        </div>
+    </div>
+</div>

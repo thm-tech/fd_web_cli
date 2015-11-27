@@ -1,0 +1,1 @@
+"use strict";define(["angular","app"],function(a,b){var c=/^[a-zA-Z]\w+$/;b.directive("accountRule",function(){return{require:"ngModel",link:function(a,b,d,e){e.$parsers.unshift(function(b){return c.test(a.account)?(e.$setValidity("arule",!0),b):void e.$setValidity("arule",!1)})}}})});

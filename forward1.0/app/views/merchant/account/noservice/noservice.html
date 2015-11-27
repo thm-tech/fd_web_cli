@@ -1,0 +1,9 @@
+<div style="background-color:#fff;height:670px">
+    <p style="font-size:30px;text-align:center;padding-top:60px">
+        <span>{{accountInfo.statusStr}}</span>
+        <a href="javascript:;" ng-if="accountInfo.status == 3" >续费</a><br />
+        <a href="javascript:;" ng-if="accountInfo.status == 5" >续交年费</a><br />
+        <span>{{accountInfo.remindStr}}</span>
+        <span style="color:#63ca89">{{accountInfo.pfPhone}}</span>
+    </p>
+</div>

@@ -1,0 +1,9 @@
+﻿<div class="feed_ctrl"ng-controller="FeedbackCtrl">
+<div class="row mag-row mag-head"><span class="left center-block">在线反馈</span></div>
+<hr class="feed_hr"></hr>
+<form name="feedback" novalidate>
+<textarea placeholder="请输入您的意见或建议" class="feed_textarea" name="text"cols="101" rows="25" ng-model="content" spellcheck="false"  required></textarea>
+<button  class="feed_send1"  value="发送" ng-show="feedback.$invalid" disabled>发送</button> 
+<button  class="feed_send2"  value="发送" ng-click="send()" ng-hide="feedback.$invalid">发送</button> 
+</form>
+</div>

@@ -1,0 +1,17 @@
+<div>
+    <div class="modal-header" style="padding:5px">
+        <div class="modal-title" style="font-weight:bold">发布提示:</div>
+    </div>
+    <div class="modal-body" style="padding:10px">
+        <p style="font-size:20px;text-align:center">确认发布此商品吗?</p>
+        <label>
+            <input ng-disabled="!cb || !rest" type="checkbox" ng-model="notice" />通知粉丝
+        </label>
+        <span>(粉丝数:{{fansNum}})</span>
+        <p style="color:#ccc">本月群发通知已发送{{postedNum}}条,剩余{{restNum}}条</p>
+    </div>
+    <div class="modal-footer" style="padding:10px">
+        <button type="button" class="cancel-btn" ng-click="_cancel()">取消</button>
+        <button type="button" class="submit-btn" ng-click="_confirm()">确定</button>
+    </div>
+</div>

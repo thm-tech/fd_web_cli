@@ -1,0 +1,56 @@
+<div class="basicInfo">
+    <form role="form" name="basic">
+        <div class="basic-filed">
+            <label class="input-title">商品名称</label>
+            <input type="text" class="basic-text" data="description" ng-focus="txFocus($event)" ng-blur="txBlur()" ng-model="goodsBasic.description" />
+            <a ng-show="edit == 'description'" href="javascript:void(0)" data="description" ng-click="saveBasic($event,goodsBasic.description)" >保存</a>
+            <span style="color:#63ca89" ng-show="saved == 'description'">{{saveInfo}}</span>
+        </div>
+        <div class="basic-filed">
+            <label class="input-title">商品条码</label>
+            <input type="text" class="basic-text" data="bar_code" ng-focus="txFocus($event)" ng-blur="txBlur()" ng-model="goodsBasic.bar_code" />
+            <a ng-show="edit == 'bar_code'" href="javascript:void(0)" data="bar_code" ng-click="saveBasic($event,goodsBasic.bar_code)" >保存</a>
+            <span style="color:#63ca89" ng-show="saved == 'bar_code'">{{saveInfo}}</span>
+        </div>
+        <div class="basic-filed">
+            <label class="input-title">品牌名称</label>
+            <input type="text" class="basic-text" data="brand_name" ng-focus="txFocus($event)" ng-blur="txBlur()" ng-model="goodsBasic.brand_name" />
+            <a ng-show="edit == 'brand_name'" href="javascript:void(0)" data="brand_name" ng-click="saveBasic($event,goodsBasic.brand_name)" >保存</a>
+            <span style="color:#63ca89" ng-show="saved == 'brand_name'">{{saveInfo}}</span>
+        </div>
+        <div class="basic-filed">
+            <label class="input-title">售价</label>
+            <input type="text" class="basic-text" data="price" ng-focus="txFocus($event)" ng-blur="txBlur()" ng-model="goodsBasic.price" />
+            <a ng-show="edit == 'price'" href="javascript:void(0)" data="price" ng-click="saveBasic($event,goodsBasic.price)" >保存</a>
+            <span style="color:#63ca89" ng-show="saved == 'price'">{{saveInfo}}</span>
+        </div>
+        <div class="basic-filed">
+            <label class="input-title">促销价</label>
+            <input type="text" class="basic-text" data="promotion_price" ng-focus="txFocus($event)" ng-blur="txBlur()" ng-model="goodsBasic.promotion_price" />
+            <a ng-show="edit == 'promotion_price'" href="javascript:void(0)" data="promotion_price" ng-click="saveBasic($event,goodsBasic.promotion_price)" >保存</a>
+            <span style="color:#63ca89" ng-show="saved == 'promotion_price'">{{saveInfo}}</span>
+        </div>
+        <div class="basic-filed">
+            <label class="input-title">商品描述</label>
+            <textarea  title="{{goodsBasic.detail}}" style="vertical-align:top;width: 520px;margin-left: 10px;" data="detail" ng-focus="txFocus($event)" ng-blur="txBlur()" ng-model="goodsBasic.detail" rows="6" cols="30" /></textarea>
+            <a ng-show="edit == 'detail'" href="javascript:void(0)" data="detail" ng-click="saveBasic($event,goodsBasic.detail)" >保存</a>
+            <span style="color:#63ca89" ng-show="saved == 'detail'">{{saveInfo}}</span>
+        </div>
+        <div class="basic-filed">
+            <label class="input-title">备注</label>
+            <textarea class="goods-remark" style="margin-left:10px" title="{{goodsBasic.remark}}" data="remark" ng-focus="txFocus($event)" ng-blur="txBlur()" ng-model="goodsBasic.remark" rows="6" cols="30" ></textarea>
+            <a ng-show="edit == 'remark'" href="javascript:void(0)" data="remark" ng-click="saveBasic($event,goodsBasic.remark)" >保存</a>
+            <span style="color:#63ca89" ng-show="saved == 'remark'">{{saveInfo}}</span>
+        </div>
+        <div class="basic-filed" ng-repeat="goodsParam in goodsBasic.basic_info" ng-if="goodsParam.paramsName != '备注'">
+            <label class="input-title">{{goodsParam.paramsName}}</label>
+            <input type="text" class="basic-text" title="{{goodsParam.paramsValue}}" ng-model="goodsParam.paramsValue" readonly />
+        </div>
+        <!--
+        <div class="basic-filed" ng-repeat="goodsParam in goodsBasic.basic_info" ng-if="goodsParam.paramsName == '备注'" >
+            <label class="input-title">{{goodsParam.paramsName}}</label>
+            <textarea class="goods-remark" style="margin-left:10px" title="{{goodsParam.paramsValue}}" ng-model="goodsParam.paramsValue" rows="6" cols="30" readonly ></textarea>
+        </div>
+        -->
+    </form>
+</div>

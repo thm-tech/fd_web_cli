@@ -1,0 +1,8 @@
+{
+    "hostname": "immbear.com",
+    "webURL" : "http://api.immbear.com",
+    "_webURL" : "api.immbear.com",
+    "chatURL" : "http://chat.immbear.com",
+    "_chatURL" : "chat.immbear.com:8889",
+    "serviceTEL" : "15155195957"
+}

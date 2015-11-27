@@ -1,0 +1,1 @@
+"use strict";define(["angular","app"],function(a,b){b.directive("contenteditable",function(){return{restrict:"A",require:"?ngModel",link:function(a,b,c,d){function e(){var a=b.html();c.stripBr&&"<br>"==a&&(a=""),d.$setViewValue(a)}d&&(d.$render=function(){b.html(d.$viewValue||"")},b.on("blur keyup change",function(){a.$apply(e)}),e())}}})});

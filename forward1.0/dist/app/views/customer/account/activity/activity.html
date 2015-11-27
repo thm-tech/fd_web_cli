@@ -1,0 +1,43 @@
+<div ng-controller="activityCtrl">
+    <div ng-show="act.actStatus.showList" class="act-list-display">
+        <div class="act-area-head">
+            <span class="act-area-title">活动专区</span>
+            <span class="fa fa-times fa-2x close-icon" ng-click="act.closeList()"></span>
+        </div>
+        <div class="act-area-content">
+            <ul class="act-contain">
+                <li ng-repeat="_act in act.actList" style="margin-top:10px">
+                <img style="vertical-align:top" ng-src="{{_act.shopPic}}@220w_160h_1e_0l_1c" width="220" height="160" ng-click="act.showActDet(_act)">
+                <div class="act-text">
+                    <h3 class="act-title">
+                        <a title="{{_act.title}}" ng-click="act.showActDet(_act)">{{_act.title}}</a>
+                    </h3>
+                    <a class="common-icon send-friend-icon" style="top:190px;right:0" title="发送活动" ng-click="act.sendAct(_act.actID,_act.title,_act.shopPic)"></a>
+                    <span class="act-shop-name" title="{{act.shopName}}">【{{_act.shopName}}】</span>
+                </div> 
+                </li>
+            </ul>
+            <div class="pagination-wrapper">
+                <pagination total-items="act.totalAct" first-text="首页" previous-text="上一页" next-text="下一页" last-text="尾页" items-per-page="act.itemsPerPage" ng-click="act.selectPage(act.curPage)" ng-model="act.curPage" max-size="act.maxSize" class="pagination-md" boundary-links="true"></pagination>
+            </div>
+            
+        </div>
+    </div>
+    <div class="act-detail-display" ng-show="!act.actStatus.showList">
+        <div class="act-detail-head">
+            <span class="act-detail-title" title="{{act.actDet.title}}">{{act.actDet.title}}</span>
+            <a style="margin-left:350px" ng-click="act.sendAct(act.actDet.actID,act.actDet.title,act.actDet.shopPic)">发送活动</a>
+            <a ng-click="act.intoShop(act.actDet.shopID,act.actDet.shopName)">进入店铺</a>
+            <span class="fa fa-times fa-2x close-icon" ng-click="act.closeDet()"></span>
+        </div>
+        <div class="act-detail-contain">
+            <div class="act-text">
+            <div ng-bind-html="act.actDet.content"></div>
+            </div>
+            <div class="act-time">
+                <span>{{act.actDet.bt}}</span>至
+                <span>{{act.actDet.et}}</span>
+            </div> 
+        </div>
+    </div>
+</div>

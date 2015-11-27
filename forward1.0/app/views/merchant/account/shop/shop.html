@@ -1,0 +1,211 @@
+﻿<div class="shop-contain" ng-controller="shopCtrl">
+    <ul class="goods-list sub-title">
+        <li ng-class="{'active-subnav':curSubnav == 'info'}"><a class="sub-title" ng-class="{'a-green':curSubnav == 'info'}" data="info" ng-click="modSubnav($event);info()" href="javascript:void(0)">基本信息</a></li>
+        <li ng-class="{'active-subnav':curSubnav == 'pic'}"><a class="sub-title" ng-class="{'a-green':curSubnav == 'pic'}" data="pic" ng-click="modSubnav($event);pic()" href="javascript:void(0)">店面图片</a></li>
+        <li ng-class="{'active-subnav':curSubnav == 'intro'}"><a class="sub-title" ng-class="{'a-green':curSubnav == 'intro'}" data="intro" ng-click="modSubnav($event);intro()" href="javascript:void(0)">图文介绍</a></li>
+    </ul>
+    <div class="cutting-line"></div>
+	
+    <div ng-show="shopInfo" >
+        <div ng-controller="shopInfoCtrl">
+            <form class="shop_form1" name="infoForm">
+                <div ng-mouseleave="savebrandname=false" ng-mouseenter="savebrandname=true">
+				<label class="lableheight">品牌名称</label>
+                <input class="inputed" type="text" ng-model="brand_name"
+                       onmouseover="this.style.border='1px solid #43bb6f';"
+                       onmouseout="this.style.border='1px solid #bfbfbf'" 
+                       >
+                <button class="save" ng-click="savechange(1)" ng-show="savebrandname" >保存</button>
+				<span class="saveres" ng-show="resultinfoyes==1">{{resultinfo}}</span>
+				</div>
+                <div class="divide"></div>
+				<div ng-mouseleave="categoryshow=false;savecate=false;" ng-mouseenter="savecate=true">
+                
+                <label class=" lableheight">主营类别</label>
+				<input class="inputed" type="text" ng-model="category_list" onmouseover="this.style.border='1px solid #43bb6f';" onmouseout="this.style.border='1px solid #bfbfbf'"  ng-click="savecate=true;categoryshow=true;" readonly >
+                <div ng-show="categoryshow" class="cateshow" ng-mouseleave="categoryshow=false">
+                    <!--//行业类别开始 -->
+                    <div class="tree">
+                        <ul>
+						<li ng-repeat="pcate in cate" ng-class="{closed:pcate.closed}" class="shop_pcate">
+						<div ng-click="pcate.closed=!pcate.closed">
+						<span class="glyphicon" ng-class="pcate.closed?'glyphicon-minus':'glyphicon-plus'"></span>
+						<a>{{pcate.name}}</a>
+						</div>
+							<ul ng-class="{hidden: !pcate.closed}" >
+							<li class="shop_ccate" ng-repeat="ccate in pcate.son" ng-class="{closed:ccate.closed}">
+							<a ng-model="ccateid" ng-click="ccateChange(ccate)">{{ccate.name}}</a>
+							</li>
+							</ul>
+						</li>
+						</ul>
+                    </div>
+                    <!--//行业类别结束 -->
+                </div>
+				<button class="save" ng-click="savechange(2)" ng-show="savecate">保存</button>
+                <span class="saveres" ng-show="resultinfoyes==2">{{resultinfo}}</span>
+                </div>
+
+                <div class="divide"></div>
+				<div ng-mouseleave="saveshopname=false" ng-mouseenter="saveshopname=true">
+                <label class="lableheight">店面名称</label>
+
+                <input class="inputed" type="text" ng-model="shop_name"
+                       onmouseover="this.style.border='1px solid #43bb6f';"
+                       onmouseout="this.style.border='1px solid #bfbfbf';" 
+                       >
+                <button class="save" ng-click="savechange(3)" ng-show="saveshopname">保存</button>
+				<span class="saveres" ng-show="resultinfoyes==3">{{resultinfo}}</span>
+               </div>
+
+                <div class="divide"></div>
+				<div ng-mouseleave="savehour=false" ng-mouseenter="savehour=true">
+                <label class="lableheight">营业时间</label>
+                <input class="inputed" type="text" ng-model="business_hours"
+                       onmouseover="this.style.border='1px solid #43bb6f';"
+                       onmouseout="this.style.border='1px solid #bfbfbf';" 
+                       >
+                <button class="save" ng-click="savechange(4);" ng-show="savehour" >保存</button>
+				<span class="saveres" ng-show="resultinfoyes==4">{{resultinfo}}</span>
+                </div>
+
+                <div class="divide"></div>
+				<div ng-mouseleave="savetel=false" ng-mouseenter="savetel=true">
+                <label class="lableheight">店面电话</label>
+                <input class="inputed" type="text" ng-model="telephone_no"
+                       onmouseover="this.style.border='1px solid #43bb6f';"
+                       onmouseout="this.style.border='1px solid #bfbfbf';" 
+                       >
+                <button class="save" ng-click="savechange(5);" ng-show="savetel"  >保存</button>
+				<span class="saveres" ng-show="resultinfoyes==5">{{resultinfo}}</span>
+                </div>
+
+                <div class="divide"></div>
+				<div ng-mouseleave="savecity=false" ng-mouseenter="savecity=true">
+                <label class="lableheight">　　城市</label>
+                <select class="selectx" ng-model="curcity_id"
+                        ng-options="city.city_id as city.city_name for city in citylist"
+                        onmouseover="this.style.border='1px solid #43bb6f';"
+                        onmouseout="this.style.border='1px solid #bfbfbf';"
+						ng-change="changemapcenter()"						>
+                </select>
+                <label class="lableheight">城区</label>
+                <select class="selectx select2" ng-model="curdistrict_id"
+                        ng-options="district.district_id as district.district_name for district in districtlist"
+                        onmouseover="this.style.border='1px solid #43bb6f';"
+                        onmouseout="this.style.border='1px solid #bfbfbf';"  >
+                </select>
+                <button class="save" ng-click="savechange(6);" ng-show="savecity"  >保存</button>
+				<span class="saveres" ng-show="resultinfoyes==6">{{resultinfo}}</span>
+                </div>
+
+                <div class="divide"></div>
+				<div ng-mouseleave="savearea=false" ng-mouseenter="savearea=true">
+                <label class="lableheight">　　商圈</label>
+
+                <input class="inputed" type="text" ng-model="business_area"
+                       onmouseover="this.style.border='1px solid #43bb6f';"
+                       onmouseout="this.style.border='1px solid #bfbfbf';" 
+                       >
+                <button class="save" ng-click="savechange(7);" ng-show="savearea" >保存</button>
+				<span class="saveres" ng-show="resultinfoyes==7">{{resultinfo}}</span>
+               </div>
+
+                <div class="divide"></div>
+				<div ng-mouseleave="saveaddress=false" ng-mouseenter="saveaddress=true">
+                <label class="lableheight">详细地址</label>
+
+                <input class="inputed" type="text" ng-model="address"
+                       onmouseover="this.style.border='1px solid #43bb6f';"
+                       onmouseout="this.style.border='1px solid #bfbfbf';" 
+                       >
+                <button class="save" ng-click="savechange(8);" ng-show="saveaddress" >保存</button>
+				<span class="saveres" ng-show="resultinfoyes==8">{{resultinfo}}</span>				
+                </div>
+                <div class="divide"></div>
+				<div ng-mouseleave="savemapmark=false;"  ng-mouseenter="mapshow=true;savemapmark=true">
+                <label class="lableheight">地图标注</label>
+
+                <input class="inputed" type="text" ng-model="mapmark"
+                       onmouseover="this.style.border='1px solid #43bb6f';"
+                       onmouseout="this.style.border='1px solid #bfbfbf';" readonly>
+                <button class="save" ng-click="savechange(9);mapshow=false" ng-show="savemapmark" >保存</button>
+				<span class="saveres" ng-show="resultinfoyes==9">{{resultinfo}}</span>
+                </div>
+
+            </form>
+
+            <div class="shop_qr">
+                <p class="shop_qrtxt">店铺二维码</p><br>
+
+                <div class="shopqrcode">
+                    <qrcode data="{{shopqrcode}}" size="200"></qrcode>
+                </div>
+			</div>
+                <div ui-map="maparea"  ui-options="mapOptions"  class="shop_maparea"
+                     ui-event="{'map-click': 'addMarker($event, $params)', 'map-zoomend': 'setZoomMessage(maparea.getZoom())' }"
+                     >
+                </div>
+				<div class="shop_mapsearch">
+				<input type="text" class="shop_qrbox" ng-model="position" ng-keypress="enter($event)"/> <button ng-click="mapsearch()">搜索</button>
+				</div>
+        </div>
+		<br>
+    </div>
+
+    <div ng-show="shopPic" ng-controller="shopPicCtrl" class="shop_pic">
+
+        <ul  class="img-list ">
+
+            <li class="imhover-project-10" style="width:210px;height:210px;margin-left:26px;margin-right:17px;top:20px;" ng-repeat="i in uploader.queue">
+                <div class="mask" >
+                    <div class="load-container" style="width:210px;height:210px">
+                        <div class="loader-6" style="margin:55px auto;">加载中...</div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="imgli" ng-repeat="imgsrc in imgInfo.shop_img_urls track by $index">
+                <div  class="imgs border-style1"ng-mouseenter="del=!del"  ng-mouseleave="del = !del" ng-init="del=false">
+					 <img style="border:none !important;margin-top: -5px;" ng-src="{{imgsrc }}@207w_207h_0e" ng-click="zoom(imgsrc,$index)">
+				     <a class="trash-icon shop_del" href="javascript:void(0)" ng-show="del" ng-click="delPic(imgsrc)"></a>				 
+                </div>
+            </li>
+            <div class="uploadicon ">
+                <input style="opacity: 0;" nv-file-select="" uploader="uploader" multiple="" type="file">			
+            </div>
+        </ul>
+		
+		<div ng-show="showimg" class="large-bk" style="margin-left:0;">
+			<a ng-class="{'a-disabled':noLast}" class="turn-left" ng-click="backwardPic()"><i class="fa fa-chevron-left fa-4x"></i></a>
+			<img style="display:inline-block;" ng-src="{{imagesource}}" />
+			<a class="trash-icon" href="javascript:void(0)" ng-click="showimg=false"></a>
+			<a ng-class="{'a-disabled':noNext}" class="turn-right" ng-click="forwardPic()"><i class="fa fa-chevron-right fa-4x"></i></a>
+		</div>
+		
+    </div>
+
+    <div ng-show="shopIntro"  class="shop_info">
+        <div ng-controller="shopIntroCtrl" class="m_shop_info_div">
+            <div ng-hide="editor" >
+			 
+                <a href=""><img src="../../../../images/shop_edit.png" class="edit" ng-click="editIntro()"></a>
+                <div class="shop_introhtml" ng-bind-html="intro" ></div>
+            </div>
+            <div ng-show="editor">
+                <form role="form">
+                    <div class="shop_intro">
+                        <textarea ckeditor="editorOptions" name="editor" ng-model="introduction"></textarea>
+                    </div>
+                    <br />
+                    <div style="float:right;">
+                        <button class="btn btn-default m_save_button" ng-click="caceledit()" class="shop_introcancel">取消</button>
+                        <button class="btn btn-default m_save_button" ng-click="saveIntro()">保存</button>
+                    </div>
+                </form>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+</div>
+

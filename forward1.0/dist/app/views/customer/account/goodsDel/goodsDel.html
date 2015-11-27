@@ -1,0 +1,75 @@
+<div>
+    <div class="goods-detail-contain">
+        <div class="goods-top">
+            <span class="goods-name" title="{{goods.info.desp}}" ng-bind="goods.info.desp"></span>
+            <a class="collect-goods" ng-class="{'collected':favorite}" ng-click="goods.collectGoods()">
+                    <i class="common-icon no-collect-icon"></i>
+                    收藏({{goods.info.attention_count}})
+            </a>  
+            <a class="croom" ng-click="shop.intoChat()"><i class="common-icon chat-icon" style="vertical-align:middle;width:35px"></i>聊天室({{goods.customers}})</a>
+            <span class="common-icon pletter-icon" title="私信店家" style="vertical-align:text-bottom" ng-click="goods.pLetter()">私信</span>
+            <span class="common-icon send-friend-icon" title="发送商品" style="display::inline-block;margin-top:4px;position:static;vertical-align:top;text-indent:-9999px" ng-click="goods.sendGoods()">发送商店</span>
+            <a class="into-shop" ng-click="goods.intoShop()" >进店</a>
+            <span class="fa fa-times fa-2x close-icon" ng-click="goods.close()"></span>
+        </div>
+        <div class="goods-images-contain" style="margin:0 auto;width:500px">
+            <carousel interval="goods.imgInterval" no-wrap="goods.noWrapSlides">
+                <slide ng-repeat="slide in goods.slides" active="slide.active">
+                    <img ng-src="{{slide.img}}@500w_500h_0e_1l" style="margin:0 auto">
+                </slide>
+            </carousel>
+        </div>
+        <div class="price-del">
+            <span ng-if="goods.info.promot" class="price" ng-bind="goods.info.price | currency:'￥'"></span>&nbsp;&nbsp;
+            <span ng-if="!goods.info.promot" class="pro-price" ng-bind="goods.info.price | currency:'￥'"></span>&nbsp;&nbsp;
+            <span ng-if="goods.info.promot" class="pro-price" ng-bind="goods.info.promot | currency:'￥'"></span>
+        </div>
+        <div class="goods-name">
+            <span ng-bind="goods.info.desp"></span>
+        </div>
+        <div class="goods-info-contain">
+            <div class="string"></div>
+            <h3 class="goods-title">基本信息</h3>
+            <div class="goods-info">
+                <label>品牌:</label>  
+                <span>{{goods.info.brandName}}</span>
+            </div>
+            <div class="goods-info">
+                <label>描述:</label>
+                <span>{{goods.info.detail}}</span>
+            </div>
+            <div class="goods-info">
+                <label>备注:</label>
+                <span>{{goods.info.remark}}</span>
+            </div>
+            <!--
+            <div class="goods-info" ng-if="goods.info.basic" ng-repeat="goodsParam in goods.info.basic">
+                <label>{{goodsParam.paramsName}}</label>
+                <span>{{goodsParam.paramsValue}}</span>
+            </div>
+            -->
+        </div>
+        <div class="goods-cus-show">
+            <div class="string"></div>
+            <h3 class="goods-title">客户秀</h3>
+            <div class="no-cus-fit" ng-show="goods.noCusFit">
+                <p>当前暂无图片</p>
+            </div>
+            <ul class="cus-img-wrapper" >
+                <li class="cus-img-item" ng-class="{'cur-item':goods.curImg == $index}" ng-repeat="imgUrl in goods.customerFit track by $index">
+                <img src="" width="232" height="249" lazy-load="{{imgUrl}}@232w_249h_1e_0l_1c" ng-click="goods.dealImg(imgUrl,$index)">
+                </li>
+            </ul>
+            <div ng-show="goods.showLarge" class="widget-carousel">
+                <img ng-src="{{goods.largeSrc}}" ng-click="goods.closeLarge()">
+                <a ng-if="goods.customerFit.length > 1" class="view-navleft" ng-class="{'default-cur':goods.noLast}" ng-click="goods.lastImg()">
+                </a>
+                <a ng-if="goods.customerFit.length > 1" class="view-navright" ng-class="{'default-cur':goods.noNext}" ng-click="goods.nextImg()">
+                </a>
+            </div>
+            <div  class="shops-loading-wrapper" ng-if="goods.cusFitLoading">
+                <span class="load-more-icon" id="shops-loading">载入更多</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,217 @@
+<div style="background-color: #ffffff;min-height:670px">
+    <div class="container-fluid" ng-controller="fanslist">
+        <div id="hidden_div" class="hidden">
+            <div class="row m_head_row">
+                <h4 class="m_server_head" style="display: inline">粉丝 : {{ page.total_num }} 位</h4>
+                <button class="pull-right nav-btn" ng-click="show.should_i_show = 4; isAvailableSend()">群发消息</button>
+            </div>
+            <hr class="m_hr"/>
+            <div ng-show="show.should_i_show == 1">
+                <table class="table table-hover fd-table">
+                    <thead class="m_table_head">
+                    <tr>
+                        <!--<th style="width: 60px">编号</th>-->
+                        <th class="text-center" style="width: 8%">头像</th>
+                        <th class="text-center" style="width: 19%">粉丝昵称</th>
+                        <th class="text-center" style="width: 15%">逛店次数</th>
+                        <th class="text-center" style="width: 28%">最后逛店时间</th>
+                        <th class="text-center" style="width: 15%">收藏商品</th>
+                        <th class="text-center" style="width: 15%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="fan in fans">
+                        <!--<td>{{ fan.index }}</td>-->
+                        <td class="text-center" style="font-size: 16px"><img class="img-circle"
+                            ng-src="{{ fan.portrait_url }}@30w_30h.jpeg"
+                                                                             style="height:30px;width:30px;"></td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_name }}</td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_visit_num }}</td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_last_visitime }}</td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_favorite_num }}</td>
+                        <td class="text-center" style="font-size: 16px">
+                            <a href="javascript:void(0)" class="m_table_a" ng-click="drop_down(fan)" title="发送消息">
+                                <i class="fa fa-envelope-o color-63ca89" style="font-size: 16px;"></i>
+                            </a>
+                            <a href="javascript:void(0)" ng-click="drop_g_down(fan)" class="m_table_a" title="粉丝详情">
+                                <i class="fa fa-star-o color-63ca89"
+                                   style="position: relative; top: 1px;font-size:16px"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row" style="clear:both;position: absolute;width: 720px;top: 660px;">
+                    <div class="col-sm-offset-3">
+                        <ul class="pagination-tb center-block inline-block">
+                            <li>
+                                <a href="javascript:void(0)" aria-label="Previous" ng-click="init(1)">
+                                    <span aria-hidden="true">首页</span>
+                                </a>
+                            </li>
+                            <li ng-class="{disabled: page.current_page-1 == 0}">
+                                <a href="javascript:void(0)" aria-label="Previous" ng-click="init(page.current_page-1)">
+                                    <span aria-hidden="true">&lt;</span>
+                                </a>
+                            </li>
+                            <li ng-repeat="index in page.plist" ng-class="{active:is_current(index)}">
+                                <a href="javascript:void(0)" ng-click="init(index)">{{ index }}</a></li>
+                            <li ng-class="{disabled: page.current_page == page.page_num}">
+                                <a href="javascript:void(0)" aria-label="Next" ng-click="init(page.current_page+1)">
+                                    <span aria-hidden="true">&gt;</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-label="Previous" ng-click="init(page.page_num)">
+                                    <span aria-hidden="true">尾页</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="inline-block" style="color: #c9c9c9">
+                            共<span style="color: #55D484">{{ page.page_num }}</span>页
+                            &nbsp;&nbsp;&nbsp;&nbsp;第
+                            <input type="text" class="inline-block"
+                                   style="display: inline; width:33px; height:33px; color: #c9c9c9;"
+                                   ng-model="in_index"/>
+                            页
+                            <button type="button" ng-click="init(in_index)" class="m_button">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-controller="fanMsg" ng-show="show.should_i_show == 2" class="m_table m_fuck_div">
+                <table class="table table-hover" style="z-index: -1;">
+                    <thead class="m_table_head">
+                    <tr>
+                        <!--<th style="width: 60px">编号</th>-->
+                        <th class="text-center" style="width: 8%">头像</th>
+                        <th class="text-center" style="width: 19%">粉丝昵称</th>
+                        <th class="text-center" style="width: 15%">逛店次数</th>
+                        <th class="text-center" style="width: 28%">最后逛店时间</th>
+                        <th class="text-center" style="width: 15%">收藏商品</th>
+                        <th class="text-center" style="width: 15%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <!--<td>{{ fan.index }}</td>-->
+                        <td class="text-center" style="font-size: 16px"><img class="img-circle"
+                                                                             ng-src="{{ fan.portrait_url }}@30w_30h.jpeg"
+                                                                             style="height:30px;width:30px;"></td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_name }}</td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_visit_num }}</td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_last_visitime }}</td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_favorite_num }}</td>
+                        <td class="text-center" style="font-size: 16px">
+                            <a href="javascript:void(0)" class="m_table_a" ng-click="drop_up()" style="color: #ff3300;"
+                               title="返回" style="font-size: 16px;">
+                                <span class="glyphicon glyphicon-menu-up color-f96b3a" aria-hidden="true"
+                                      style="font-size: 16px;"></span>
+                            </a>
+                            <a href="javascript:void(0)" ng-click="show.should_i_show = 3" class="m_table_a"
+                               title="粉丝详情" style="font-size: 16px;">
+                                <i class="fa fa-star-o color-63ca89"
+                                   style="position: relative; top: 1px;font-size: 16px;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="m_info" style="padding-right: 2px;font-size: 16px !important;">
+                <textarea ckeditor="editorOptions" name="editor" ng-model="ckcontent"
+                    placeholder="{{ ckcontent_holder }}"></textarea>
+                    <button type="button" class="pull-right submit-btn" ng-click="send()"
+                            ng-disabled="!ckcontent ||disable"
+                            style="position:relative; top: 10px">
+                        发送
+                    </button>
+                    <span style="position:absolute;color:#666666; font-size: 14px;">{{ ckcontent_holder }}</span>
+                </div>
+            </div>
+
+            <div class="m_table m_fuck_div" ng-controller="focusG" ng-show="show.should_i_show == 3">
+                <table class="table table-striped table-hover" style="z-index: -1;">
+                    <thead class="m_table_head">
+                    <tr>
+                        <!--<th style="width: 60px">编号</th>-->
+                        <th class="text-center" style="width: 8%">头像</th>
+                        <th class="text-center" style="width: 19%">粉丝昵称</th>
+                        <th class="text-center" style="width: 15%">逛店次数</th>
+                        <th class="text-center" style="width: 28%">最后逛店时间</th>
+                        <th class="text-center" style="width: 15%">收藏商品</th>
+                        <th class="text-center" style="width: 15%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <!--<td>{{ fan.index }}</td>-->
+                        <td class="text-center" style="font-size: 16px"><img class="img-circle" ng-src="{{ fan.portrait_url }}@30w_30h.jpeg"
+                                                                             style="height:30px;width:30px;"></td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_name }}</td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_visit_num }}</td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_last_visitime }}</td>
+                        <td class="text-center" style="font-size: 16px">{{ fan.user_favorite_num }}</td>
+                        <td class="text-center" style="font-size: 16px">
+                            <a href="javascript:void(0)" class="m_table_a" ng-click="show.should_i_show=2" title="发送消息"
+                               style="font-size: 16px;">
+                                <i class="fa fa-envelope-o color-63ca89" style="font-size: 16px;"></i>
+                            </a>
+                            <a href="javascript:void(0)" ng-click="show.should_i_show = 1" class="m_table_a"
+                               style="color: #ff3300;" title="返回" style="font-size: 16px;">
+                                <span class="glyphicon glyphicon-menu-up color-f96b3a" aria-hidden="true"
+                                      style="font-size: 16px;"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row" style="padding-left: 7px;padding-bottom: 30px;">
+                    <div class="project-item col-sm-4 m_div_img" ng-repeat="good in fan_all_info.goods"
+                         style="background-image: url('{{ good.pic_url_list[0] }}');">
+                        <div class="project-hover">
+                            <div class="inside" style=""></div>
+                            <p class="center-block"
+                               style="font-size: 16px; padding-left: 10px; margin: 2px; margin-top: 5px;">
+                                {{ good.description }}</p>
+
+                            <p class="pull-right" style="font-size: 14px;padding-left: 2px;  margin: 2px;">
+                                <span style="font-size: 20px;color: #F96B3A" ng-if="good.promotion_price">{{ good.promotion_price }}</span>&nbsp;<span ng-if="good.promotion_price"
+                                    style="color: #F96B3A;">元</span>&nbsp;&nbsp;
+                                <del ng-if="good.promotion_price">{{ good.price }}元</del>
+                                <span style="font-size: 20px; color: #F96B3A;"  ng-if="!good.promotion_price">{{ good.price }}<span style="font-size: 14px;">元</span></span>
+                                &nbsp;&nbsp;
+                                <!--<span style="font-size: 24px;color: #F96B3A">{{ good.promotion_price }}</span>-->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="m_table m_fuck_div" ng-controller="sendall" ng-show="show.should_i_show == 4">
+                <div class="m_info" style="padding-right: 2px;">
+                <textarea id="ck_2" ckeditor="editorOptions" name="editor" ng-model="ckcontent"
+                    placeholder="{{ ckcontent_holder }}"></textarea>
+                    <button type="button" class="pull-right submit-btn" ng-click="send()"
+                            style="position:relative; top: 10px"
+                            ng-disabled="!ckcontent || disable">
+                        发送
+                    </button>
+                    <button type="button" class="pull-right cancel-btn" ng-click="show.should_i_show = 1"
+                            style="position:relative; top: 10px; margin-right: 20px;">
+                        取消
+                    </button>
+                    <span style='position: absolute; color: #666666; font-size: 14px;'>{{ ckcontent_holder }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .fd-table tr td a {
+        display: inline-block;
+        text-align: center;
+        width: 20px;
+    }
+</style>

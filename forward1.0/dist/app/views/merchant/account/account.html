@@ -1,0 +1,51 @@
+<div ng-controller="mtaccountCtrl">
+<div class="fd-header login-header">
+    <div class="mm-header login-mm-header">
+    <a id="w-fd-logo">
+        <p id="w-ch-logo">
+            <span>喵喵熊</span>
+            <span>妙生活</span>
+            </p>
+    </a>
+    <div class="r-header" ng-init="dropMenu=0">
+        <img id="head-img" ng-src="{{accountInfo.portraitUrl}}@35w_35h_0e_1l" />
+        <a id="mm-user" ng-mouseenter="dropMenu=1" ng-mouseleave="dropMenu=0">
+            <span id="nowrap">{{accountInfo.accountName}}</span>
+            <!--            <span class="glyphicon glyphicon-triangle-top"></span>-->
+            <i class="tri-icon"></i>
+        </a>
+        <ul ng-show="dropMenu" ng-mouseenter="dropMenu=1" ng-mouseleave="dropMenu=0" class="dropdown-menu">
+            <li><a ng-click="modNav2($event)" data="setting" href="#/merchant/account/settings">账号设置</a></li>
+            <li><a ng-click="modNav2($event)" data="status" href="#/merchant/account/status">服务状态</a></li>
+            <li><a ng-click="modNav2($event)" data="service" href="#/merchant/account/subscription">订阅服务</a></li>
+            <li class="divider"></li>
+            <li><a href="javascript:void(0)" ng-click="logout()">退出登录</a></li>
+        </ul>
+    </div>
+    
+    </div>
+</div>
+<div class="a-contain">
+    <div class="nav-contain" ng-class="{'nav-fixed':overScroll}">
+        <ul id="nav-left">
+            <li><a class="nav-icon nav-chat" ng-class="{'nav-active':curNav == 'chatroom'}" data="chatroom" ng-click="modNav($event)" ng-href="{{navList[0]}}">
+                <span class="unread">{{chatObj.messageNum}}</span>
+            </a></li>
+            <li><a class="nav-icon nav-fans" ng-class="{'nav-active':curNav == 'fans'}"  data="fans" ng-click="modNav($event)" ng-href="{{navList[1]}}"></a></li>
+            <li><a class="nav-icon nav-goods" ng-class="{'nav-active':curNav == 'goods'}" data="goods" ng-click="modNav($event)" ng-href="{{navList[2]}}"></a></li>
+            <li><a class="nav-icon nav-activity" ng-class="{'nav-active':curNav == 'activity'}" data="activity" ng-click="modNav($event)" ng-href="{{navList[3]}}"></a></li>
+            <li><a class="nav-icon nav-shop" ng-class="{'nav-active':curNav == 'shop'}" data="shop" ng-click="modNav($event)" ng-href="{{navList[4]}}"></a></li>
+        </ul>
+    </div>
+    <div class="cont-contain">
+        <div ng-if="service">
+          <div ng-show="chat" ui-view="chat"></div>
+          <div ng-show="!chat" ui-view="function"></div>
+        </div>
+        <div ng-if="!service">
+          <div ng-show="noservice" ui-view="noservice"></div>
+          <div ng-show="!noservice" ui-view="function"></div>
+        </div>
+    </div>
+</div>
+</div>

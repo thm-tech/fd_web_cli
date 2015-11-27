@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta lang="en">
+    <meta content="text/html" charset="utf-8" http-equiv="content-type">
+    <!--
+    <meta name="renderer" content="webkit">-->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>喵喵熊 妙生活</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <meta property="qc:admins" content="5620367657615525126375" />
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link type="image/x-icon" rel="shortcut icon" href="mmx.ico"/>
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <link rel="stylesheet" href="bower_components/ng-ckeditor/ng-ckeditor.css"/>
+    <link rel="stylesheet" href="bower_components/angular-emoji-filter/dist/emoji.min.css"/>
+    <link rel="stylesheet" href="bower_components/font-awesome-less/css/font-awesome.min.css"/>
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/common.css"/>
+    <link rel="stylesheet" href="styles/merchant/platform.css"/>
+    <link rel="stylesheet" href="styles/merchant/login.css"/>
+    <link rel="stylesheet" href="styles/merchant/forgot.css"/>
+    <link rel="stylesheet" href="styles/merchant/fans.css"/>
+    <link rel="stylesheet" href="styles/merchant/goods.css"/>
+    <link rel="stylesheet" href="styles/merchant/activity.css"/>
+    <link rel="stylesheet" href="styles/merchant/shop.css"/>
+    <link rel="stylesheet" href="styles/customer/shops.css"/>
+    <link rel="stylesheet" href="styles/customer/shopDel.css"/>
+    <link rel="stylesheet" href="styles/customer/goodsDel.css"/>
+    <link rel="stylesheet" href="styles/customer/settings.css"/>
+    <link rel="stylesheet" href="styles/customer/friends.css"/>
+    <link rel="stylesheet" href="styles/customer/favorite.css"/>
+    <link rel="stylesheet" href="styles/customer/fans.css"/>
+    <link rel="stylesheet" href="styles/customer/feedback.css"/>
+    <link rel="stylesheet" href="styles/customer/activity.css"/>
+	<link rel="stylesheet" href="styles/customer/message.css"/>
+    <!-- endbuild -->
+</head>
+<body id="ng-app" ng-app="forwardApp" ui-map-async-load>
+<!--[if IE 9]>
+<p class="browsehappy">您使用的浏览器版本<strong>过低</strong>,会影响聊天等部分功能</p>
+<![endif]-->
+<!--[if lte IE 8]>
+<p class="browsehappy">您使用的浏览器<strong>out</strong>啦.<a href="http://browsehappy.com/">马上升级浏览器</a> 来提升您的浏览体验吧!.</p>
+<![endif]-->
+<div ui-view>
+    <div style="min-height:650px">
+        <div style="height:650px;background:url('images/load.gif') no-repeat center"></div>
+    </div>
+</div>
+<!-- Add your site or application content here -->
+<!--<div ng-controller="index"></div>-->
+
+<script src="//cdn.bootcss.com/require.js/2.1.17/require.min.js" data-main="scripts/main.js"></script>
+<script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+</body>
+</html>

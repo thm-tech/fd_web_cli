@@ -1,0 +1,1 @@
+"use strict";define(["angular","app","services/rememberMe"],function(a,b){b.factory("hascookie",["$location","remember",function(a,b){function c(c){return console.log(b.get("globals").accType),b.get("globals").accType==c?!0:(a.path("/customer/login"),!1)}return{check:c}}])});

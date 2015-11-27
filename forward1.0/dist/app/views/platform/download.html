@@ -1,0 +1,35 @@
+<div ng-controller="downloadCtrl">
+<div class="download-contain hidden-xs" >
+    <div class="dl-area1" >
+    	<!--
+    		<a class="ios-down">ios下载</a>
+        <a class="android-down">Android下载</a>-->
+        <p class="dl-title">喵喵熊 妙生活</p>
+        <div style="width:500px;margin-left:200px">
+        <p style="font-size:20px;color:#fff">喵喵熊iphone和android App小伙伴们正在努力开发中</p>
+        <p style="font-size:20px;color:#fff">即将上线,敬请期待...</p>
+      </div>
+        <!--
+        <div class="dl-wrapper1"></div>-->
+    </div>
+    <div class="dl-area2">
+    		<div class="dl-wrapper2"></div>	
+    </div>
+    <div class="dl-area3">
+    		<div class="dl-wrapper3"></div>	
+    </div>
+    <div class="dl-area4">
+    		<div class="dl-wrapper4"></div>		
+    </div>
+</div>
+<div class="hidden-sm hidden-md hidden-lg" style="text-align:center" ng-if="android">
+		<img class="dl-background" src="../images/dlbackground.png">
+		<p class="dl-slogan">喵喵熊 妙生活</p>
+		<input type="button" class="dl-button" value="下载喵喵熊App" ng-click="downApp('android')">
+</div>
+<div class="hidden-sm hidden-md hidden-lg"  style="text-align:center" ng-click="downApp('iphone')" ng-if="iphone">
+		<div class="dl-background"></div>
+		<p class="dl-slogan">喵喵熊 妙生活</p>
+		<input type="button" class="dl-button" value="下载喵喵熊App">	
+</div>
+</div>

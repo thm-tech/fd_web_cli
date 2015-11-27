@@ -1,0 +1,98 @@
+<div ng-controller="shopDelCtrl">
+    <div ng-show="shop.showShop">
+    <div class="cm-shop-head">
+      <span class="shop-title" style="margin:-16px 5px" title="{{shop.name}}">{{shop.name}}</span>
+      <div style="display:inline-block;margin-left:10px;line-height:44px" title="关注">
+          <a class="common-icon no-attention-icon" ng-class="{'attention-icon':attention}" ng-click="shop.interest()" style="height:34px;vertical-align:middle" ></a>
+        <span>关注({{shop.info.fans}})</span>
+      </div>      
+      <div style="display:inline-block;margin-left:10px" title="本店聊天室" ng-click="shop.intoChat()">
+        <a class="common-icon chat-icon" style="vertical-align:middle"></a>
+        <span>聊天室({{shop.info.customers}})</span>
+      </div>
+      <span class="common-icon pletter-icon" title="私信店家" style="vertical-align:text-bottom" ng-click="shop.pLetter()">私信</span>
+      <span class="common-icon send-friend-icon" title="发送商店" style="display::inline-block;margin-top:4px;position:static;vertical-align:top;text-indent:-9999px" ng-click="shop.sendShop()">发送商店</span>
+      <span class="fa fa-times fa-2x close-icon" ng-click="shop.close()"></span>
+    </div> 
+    <div class="cm-shop-nav">
+        <ul>
+            <li class="shop-nav-li"  ng-class="{'cur-shop-nav-li':shop.curNav == 'goods'}" ng-click="shop.modNav('goods')" >
+                <a href="javascript:void(0)">商品</a>
+            </li>
+            <li class="shop-nav-li" ng-class="{'cur-shop-nav-li':shop.curNav == 'activity'}" ng-click="shop.modNav('activity')">
+                <a href="javascript:void(0)">活动</a>
+            </li>
+            <li class="shop-nav-li" ng-class="{'cur-shop-nav-li':shop.curNav == 'shop'}" ng-click="shop.modNav('shop')">
+                <a href="javascript:void(0)">店铺资料</a>
+            </li>
+        </ul> 
+    </div>
+    <div class="cm-goods-contain" ng-if="shop.curNav == 'goods'">
+        <div class="cm-goods-display">
+            <ul>
+                <li ng-repeat="goods in shop.goods track by $index" style="border-bottom:1px solid #d3d2d2">
+                    <img width="240" height="240" src="" ng-src="{{goods.pic}}@240w_240h_1e_0l_1c" lazy-load="{{goods.pic}}@240w_240h_1e_0l_1c"  ng-click="shop.showGoodsDel(goods.id)" />
+                    <span class="common-icon new-goods-icon" style="top:0;left:0" ng-if="goods.newGoods"></span>
+                    <div class="goods-text" style="display:none" ng-doimg>
+                        <span class="goods-name1" title="{{goods.name}}">{{goods.name}}</span>
+                        <span ng-if="goods.promot" class="price">{{goods.price | currency:'￥'}}</span>
+                        <span ng-if="!goods.promot" class="pro-price">{{goods.price | currency:'￥'}}</span>
+                        <span ng-if="goods.promot" class="pro-price">{{goods.promot | currency:'￥'}}</span>
+                        <span class="common-icon send-friend-icon" style="top:15px;right:0" ng-click="shop.sendGoods(goods.id,goods.name,goods.pic)"></span>
+                    </div>
+                    <div class="goods-field-bot-1"></div>
+                    <div class="goods-field-bot-2"></div>
+                </li>
+            </ul>
+            <div  class="shops-loading-wrapper" ng-if="shop.goodsLoading">
+                <span class="load-more-icon" id="shops-loading">载入更多</span>
+            </div>
+        </div>
+    </div>
+    <div ng-if="shop.curNav == 'activity'">
+        <div class="shop-act-contain">
+            <div class="act-content" ng-repeat="act in shop.activities">
+                <h3 class="act-title">{{act.title}}</h3>
+                <div class="act-text">
+                    <div ng-bind-html="act.content"></div>
+                </div>
+                <div class="act-time">
+                    <span>{{act.bt}}</span>至
+                    <span>{{act.et}}</span>
+                </div>
+            </div>
+            <div class="no-act" ng-if="shop.activities.length == 0">
+                <p>商家暂无活动</p>
+            </div>
+        </div>
+    </div>
+    <div ng-if="shop.curNav == 'shop'">
+        <div class="shop-intro-contain">
+            <carousel interval="shop.imgInterval" no-wrap="shop.noWrapSlides">
+                <slide ng-repeat="slide in shop.slides" active="slide.active">
+                    <img ng-src="{{slide.img}}@756w_756h_0e_1l" style="margin:0 auto">
+                </slide>
+            </carousel>
+            <div class="shop-info-wrapper">
+                <div class="open-time" ng-if="shop.info.hours" title="{{shop.info.hours}}">  
+                <i class="fa fa-clock-o fa-2x"></i>
+                <span>{{shop.info.hours}}</span>
+              </div>
+              <div class="address" ng-if="shop.info.address" title="{{shop.info.address}}">
+                <i class="fa fa-map-marker fa-2x"></i>
+                <span>{{shop.info.address}}</span>
+              </div>
+              <div class="phoneno" ng-if="shop.info.phone" title="{{shop.info.phone}}">
+                <i class="fa fa-phone fa-2x"></i>
+                <span>{{shop.info.phone}}</span>
+              </div>
+          </div>
+            <div class="shop-address" style="margin-top:40px;width:100%;height:400px;border-top:2px solid #333">
+                <div  ui-map='shopMap' style="width:100%;height:100%;padding-top:22px"  ui-options="mapOptions" class="shop-address-map" ui-event="{'map-zoomend': 'setZoomMessage(shopMap.getZoom())' }" >
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div ng-if="shop.showGoods" ng-include="'views/customer/account/goodsDel/goodsDel.html'"></div>
+</div>

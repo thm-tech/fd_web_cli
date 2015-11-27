@@ -1,0 +1,38 @@
+<div style="background-color: #FFFFFF;height:670px">
+    <div class="container-fluid m_server_info" ng-controller="serverinfo">
+        <h4 class="m_server_head"><strong>服务状态</strong></h4>
+        <hr class="m_hr"/>
+        <div class="row">
+            <div class="col-sm-3 text_right">服务状态 :&nbsp;</div>
+            <div class="col-sm-20">{{ service_status }}</div>
+        </div>
+        <br/>
+
+        <div class="row">
+            <div class="col-sm-3 text_right">服务截止时间 :&nbsp;</div>
+            <div class="col-sm-20">{{ service_deadline }}</div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .m_server_head {
+        color: #666666;
+        font-size: 16px;
+        top: 5px;
+        position: relative;
+    }
+
+    .m_server_info {
+        color: #666666;
+        font-size: 16px;
+    }
+
+    .text_right {
+        text-align: right;
+    }
+
+    .col-sm-2 {
+        padding-right: 4px;
+    }
+</style>

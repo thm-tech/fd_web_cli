@@ -1,0 +1,33 @@
+﻿<!--[if !IE]><!--><script>
+if (/*@cc_on!@*/false) {
+    document.documentElement.className+=' ie10';
+}
+</script><!--<![endif]-->
+<div style="width:760px;margin-left:8px;" ng-controller="CollectCtrl">
+<div ng-show="hascollect">
+	<div ng-if="nocollect" style="text-align:center;">
+	<span class="tips">您没有收藏任何商品</span>
+	</div>
+	<div ng-if="collect">
+		<ul>
+		<li class="col_goodsli" ng-repeat="favlist in user.allcolData">
+			<div class="col_imgdiv" ng-click="user.intoShop(favlist.id,$index)">
+				<img ng-src='{{favlist.picList[0]}}@130w_120h_1e_0l_1c' class="col_goodspic"/>
+			</div>
+			<div class="col_desdiv">
+				<div class="col_goodsdes" ng-click="user.intoShop(favlist.id,$index)" onmouseover="this.style.color='#43bb6f';" onmouseout="this.style.color='#333333';">{{favlist.desp}}</div>
+				<span class="col_notsale" ng-show="favlist.status!==1"><div class="col_notsaleword">已下架</div></span>
+				<span class="col_goodsprice" ng-show="favlist.promot>0"><s>{{favlist.price | currency:'￥'}}</s></span></br>
+				<p class="col_promot">
+				<div class="col_goodspromot">{{favlist.idontknow | currency:'￥'}}</div>
+				<div class="col_collected common-icon" ng-hide="favlist.ifshow"	ng-click="toggle1($index,favlist.id)"></div>
+				<div class="col_cancelcol common-icon" ng-show="favlist.ifshow" ng-click="toggle2($index,favlist.id)"></div>
+				</p>
+			</div>
+		</li>
+		</ul>
+	</div>
+</div>
+<div ng-if="user.showAct" class="col_html" ng-include="'views/customer/account/activity/activity.html'"></div>
+<div ng-if="shopdel" class="col_html" ng-include="'views/customer/account/shopDel/shopDel.html'" ></div>
+</div>

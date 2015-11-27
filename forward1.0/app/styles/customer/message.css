@@ -1,0 +1,27 @@
+.msg_title{font-size:18px;font-weight:bolder;background-color:#fff;height:40px;line-height:40px;padding-left: 5px;color:#333333;}
+.msg_main{color:#999999;font-size:18px;text-decoration:none;float:left;margin-left:10px;}
+.msg_list{height:124px;width:100%;list-style:none;background-color:#fff;margin-right:10px;margin-bottom:20px;}
+.msg_picdiv{width:110px;height:110px;float:left;margin-left:7px;margin-top:7px;}
+.msg_name{font-size:18px;color:#333333;cursor:pointer;position:absolute;width:435px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;height:30px;}
+.msg_pic{width:110px;height:110px;cursor:pointer;}
+.msg_time{font-size:16px;float:right;color:#999;position:relative;width:160px;}
+.msg_text{height:110px;line-height:35px;margin-top:10px;padding-right:10px;padding-left:10px;margin-left:117px;}
+.msg_textbelowe{margin-top:33px;color:#999;font-size:16px;overflow: hidden;text-overflow: ellipsis;width:615px;height:70px;position:absolute;}
+.msg_newgoods{background-position:-5px -381px;}
+.msg_promoteact{background-position:0 -408px;}
+.msg_newtext{ margin-left: -10px;color:#f29b76;}
+.msg_aggree{width:100px;height:30px;background-color:#48D58B;color:#fff;border-radius:5px;border:none;cursor:pointer;outline: 0;line-height: 30px;margin-right:5px;}
+.msg_refuse{width:100px;height:30px;background-color:#d2d2d2;color:#fff;border-radius:5px;border:none;cursor:pointer;outline: 0;line-height: 30px;}
+.msg_buttons{right:10px;margin-top:80px;position:absolute;}
+.tips{font-size:30px;color:#aaa;text-align:center;}	
+.msg_ctr{width:757px;}
+.msg_ul{margin-top:20px;}
+.shopmsgctr{width:757px;min-height:640px;background-color:#fff;}
+.shopmsg_main{color:#999999;font-size:18px;text-decoration:none;float:left;margin-left:10px;}
+.shopmsg_title{}
+.shopmsg_name{height:44px;width:750px;background-color:#fff;line-height:44px;font-size:18px;font-weight:bold;margin-left: 10px;}
+.shopmsg_hr{margin-top: 0;margin-bottom: 0;border: 0;border-top: 1px solid #eee;}
+.shopmsg_toplink{text-decoration:underline;font-size:14px;color:#43bb6f;cursor:pointer;font-weight:lighter;padding-left: 30px;}
+.shopmsg_return{position:absolute;top:11px;right:5px;color:#ececec;cursor:pointer;font-size:1.5em;}
+.shopmsg_msgdiv{margin-left:10px;width:738px;}
+.shopmsg_time{  margin-left: 605px;color: #999;}

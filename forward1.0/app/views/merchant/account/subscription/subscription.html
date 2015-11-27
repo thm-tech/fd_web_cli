@@ -1,0 +1,51 @@
+<div style="background-color: #FFFFFF;height:670px">
+    <div class="container-fluid m_server_info" ng-controller="payinfo">
+        <h4 class="m_server_head"><strong>订阅服务</strong></h4>
+        <hr class="m_hr"/>
+        <h4 class="color-999999" style="margin-bottom: 13px;">粉丝消息服务</h4>
+
+        <div class="row m_row">
+            <div class="col-sm-3 text_right m_poor_right_padding">粉丝点对点消息数量 : &nbsp;</div>
+            <div class="col-sm-20">{{ msgconfig.current_p2p_count }}条/月(免费)</div>
+        </div>
+        <div class="row m_row">
+            <div class="col-sm-3 text_right m_poor_right_padding">粉丝群发消息数量 : &nbsp;</div>
+            <div class="col-sm-20">{{ msgconfig.current_mass_count }}条/月(免费)</div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .m_row {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .m_poor_right_padding {
+        padding-right: 3px;
+    }
+
+    .m_server_head {
+        color: #666666;
+        font-size: 16px;
+        top: 5px;
+        position: relative;
+    }
+
+    .m_server_info {
+        color: #666666;
+        font-size: 16px;
+    }
+
+    .text_right {
+        text-align: right;
+    }
+
+    .col-sm-2 {
+        padding-right: 4px;
+    }
+
+    .color-999999 {
+        color: #999999;
+    }
+</style>

@@ -1,0 +1,475 @@
+<<<<<<< HEAD
+<div class="container-fluid mag-container" ng-controller="settings">
+    <div class="row mag-row mag-head">
+        <!-- <span class="left mag-return">首页</span>-->
+        <span class="left center-block">账号信息</span>
+    </div>
+    <div class="mag-info-container">
+        <div style="float: right; padding-right: 450px">
+            <qrcode data="{{ personal.qrcode }}" size="80"></qrcode>
+        </div>
+        <form class="form-horizontal">
+            <div class="form-group" style="height: 65px;">
+                <label class="col-sm-1 control-label mag-control-label pull-left">头像</label>
+
+                <!--<div class="col-sm-6">-->
+                <!--<img class="img-circle" ng-src="{{ personal.portrait }}"/>-->
+                <!--</div>-->
+
+
+                <div class="col-sm-2">
+                    <img class="m_head center-block" ng-src="{{ personal.portrait }}@80w_80h" ng-mouseenter="is_show = true"/>
+                    <a href="javascript:void(0)" class="ghost ghost-round m_head m_head_content" ng-show="is_show">
+                        修改
+                    </a>
+                    <input class="m_head" style="opacity: 0;" nv-file-select="" uploader="uploader" multiple=""
+                           type="file"
+                           ng-mouseenter="is_show = true" ng-mouseleave="is_show = false" style="z-index: 9;">
+
+                    <div class="ghost ghost-round m_head m_head_content" ng-show="inupload"
+                         style="z-index: 10;line-height: 100%">
+                        <div class="loader-6" style="top: 8px;">wait</div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="form-group">
+                <label for="input2" class="col-sm-1 control-label mag-control-label pull-left">昵称</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control mag-form-control" id="input2" placeholder=""
+                           ng-model="personal.name" ng-blur="saveInfo(1);changeName(personal.name)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input3" class="col-sm-1 control-label mag-control-label pull-left">喵喵</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control mag-form-control" id="input3" placeholder=""
+                           ng-model="personal.mcode" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input4" class="col-sm-1 control-label mag-control-label pull-left">手机</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control mag-form-control" id="input4" placeholder=""
+                           ng-model="personal.phone" disabled>
+                </div>
+                <div ng-show="personal.phone">
+                    <a href="javascript: void(0)" style="line-height: 34px; color: #43BB6F"
+                       ng-click="popphone()">修改绑定</a>
+                </div>
+                <div ng-show="!personal.phone">
+                    <a href="javascript: void(0)" style="line-height: 34px; color: #43BB6F"
+                       ng-click="popnewphone()">绑定手机</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input5" class="col-sm-1 control-label mag-control-label pull-left">性别</label>
+
+                <div class="col-sm-4">
+                    <select class="form-control mag-form-control" id="input5" ng-model="personal.gender"
+                            ng-options="c.id as c.label for c in this_gender" ng-change="saveInfo(3)">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label mag-control-label pull-left">城市</label>
+
+                <div class="col-sm-4">
+                    <select class="form-control mag-form-control" id="input6" ng-model="personal.province"
+                            ng-options="c.province_id as c.province_name for c in this_province"
+                            style="width: 49%; display: inline-block"
+                            ng-change="getCitysAndSet(personal.province)">
+                    </select>
+                    <select class="form-control mag-form-control inline-block" id="input7" ng-model="personal.city"
+                            ng-options="c.city_id as c.city_name for c in this_city"
+                            style="width: 49%; display: inline-block; float: right" ng-change="saveInfo(4)">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label mag-control-label pull-left" style="text-align: right">收货地址</label>
+
+                <div class="col-sm-4" ng-show="addressList.length < 4">
+                    <a href="javascript: void(0)" style="position: relative; bottom: -7px; color: #43BB6F"
+                       ng-click="popnewaddress()">添加地址</a>
+                </div>
+            </div>
+
+            <div ng-repeat="address in addressList" class="row" ng-mouseenter="count=1" ng-mouseleave="count=0"
+                 ng-init="count=0">
+                <div class="col-md-10">
+                    <div class="mag-address_div col-sm-9">
+                        <div class="name col-sm-2">{{ address.name }}</div>
+                        <div class="phone col-sm-3">{{ address.phone }}</div>
+                        <div class="address col-sm-5">{{ address.address }}</div>
+                        <div class="col-sm-2">
+                            <a href="javascript:void(0)" ng-click="popmodifyaddress(address)">修改</a>
+                            <span> | </span>
+                            <a href="javascript:void(0)"
+                               ng-click="deleteAddress(address.addrID, address.default)">删除</a>
+                        </div>
+                    </div>
+                <span class="col-sm-2 mag-default-address" ng-show="address.default == 1">
+                    默认地址
+                </span>
+                    <a href="javascript: void(0)" class="col-sm-2 mag-set-default-address"
+                       ng-show="address.default != 1 && count"
+                       ng-click="setDefaultAddress(address.addrID)">
+                        设为默认
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<style>
+    .ghost {
+        display: block;
+        text-decoration: none;
+        color: #ffffff;
+        font-family: Arial;
+        font-size: large;
+        font-weight: bolder;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        padding: 0 10px 0 10px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        transition: 0.4s ease;
+        position: relative;
+    }
+
+    .ghost-round {
+        border-radius: 50%;
+        width: 62px;
+        height: 62px;
+        line-height: 62px;
+    }
+
+    .ghost:link {
+        border: 2px solid rgba(255, 255, 255, 1);
+        background-position: 140px center;
+        color: #ffffff
+    }
+
+    .ghost:visited, .ghost:hover, .ghost:active {
+        border: 2px solid #43bb6f;
+        background-position: 140px center;
+        color: #ffffff;
+    }
+
+    .ghost .line {
+        position: absolute;
+        background: none;
+        transition: 0.4s;
+    }
+
+    .ghost-silk:hover .line {
+        background: #ffffff;
+    }
+
+    .ghost .line-top {
+        width: 0px;
+        height: 2px;
+        top: -2px;
+        left: -110%;
+    }
+
+    .ghost-silk:hover .line-top {
+        width: 100%;
+        left: -2px;
+    }
+
+    .ghost .line-right {
+        width: 2px;
+        height: 0px;
+        right: -2px;
+        top: -110%;
+    }
+
+    .ghost-silk:hover .line-right {
+        height: 100%;
+        top: -2px;
+    }
+
+    .ghost .line-bottom {
+        width: 0px;
+        height: 2px;
+        bottom: -2px;
+        right: -110%;
+    }
+
+    .ghost-silk:hover .line-bottom {
+        width: 100%;
+        right: -2px;
+    }
+
+    .ghost .line-left {
+        width: 2px;
+        height: 0px;
+        left: -2px;
+        bottom: -110%;
+    }
+
+    .ghost-silk:hover .line-left {
+        height: 100%;
+        bottom: -2px;
+    }
+
+    .m_head {
+        height: 65px;
+        width: 65px;
+        border-radius: 50%;
+        position: absolute;
+        left: 10%;
+        top: 0%;
+    }
+
+    .m_head_content {
+        background: #43bb6f;
+        opacity: 0.6;
+        font-size: 16px;
+        padding-left: 15px;
+    }
+</style>
+=======
+<div class="container-fluid mag-container" ng-controller="settings">
+    <div class="row mag-row mag-head">
+        <!-- <span class="left mag-return">首页</span>-->
+        <span class="left center-block">账号信息</span>
+    </div>
+    <div class="mag-info-container">
+        <div style="float: right; padding-right: 450px">
+            <qrcode data="{{ personal.qrcode }}" size="80"></qrcode>
+        </div>
+        <form class="form-horizontal">
+            <div class="form-group" style="height: 65px;">
+                <label class="col-sm-1 control-label mag-control-label pull-left">头像</label>
+
+                <!--<div class="col-sm-6">-->
+                <!--<img class="img-circle" ng-src="{{ personal.portrait }}"/>-->
+                <!--</div>-->
+
+
+                <div class="col-sm-2">
+                    <img class="m_head center-block" ng-src="{{ personal.portrait }}@80w_80h" ng-mouseenter="is_show = true"/>
+                    <a href="javascript:void(0)" class="ghost ghost-round m_head m_head_content" ng-show="is_show">
+                        修改
+                    </a>
+                    <input class="m_head" style="opacity: 0;" nv-file-select="" uploader="uploader" multiple=""
+                           type="file"
+                           ng-mouseenter="is_show = true" ng-mouseleave="is_show = false" style="z-index: 9;">
+
+                    <div class="ghost ghost-round m_head m_head_content" ng-show="inupload"
+                         style="z-index: 10;line-height: 100%">
+                        <div class="loader-6" style="top: 8px;">wait</div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="form-group">
+                <label for="input2" class="col-sm-1 control-label mag-control-label pull-left">昵称</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control mag-form-control" id="input2" placeholder=""
+                           ng-model="personal.name" ng-blur="saveInfo(1);changeName(personal.name)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input3" class="col-sm-1 control-label mag-control-label pull-left">喵喵</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control mag-form-control" id="input3" placeholder=""
+                           ng-model="personal.mcode" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input4" class="col-sm-1 control-label mag-control-label pull-left">手机</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control mag-form-control" id="input4" placeholder=""
+                           ng-model="personal.phone" disabled>
+                </div>
+                <div ng-show="personal.phone">
+                    <a href="javascript: void(0)" style="line-height: 34px; color: #43BB6F"
+                       ng-click="popphone()">修改绑定</a>
+                </div>
+                <div ng-show="!personal.phone">
+                    <a href="javascript: void(0)" style="line-height: 34px; color: #43BB6F"
+                       ng-click="popnewphone()">绑定手机</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input5" class="col-sm-1 control-label mag-control-label pull-left">性别</label>
+
+                <div class="col-sm-4">
+                    <select class="form-control mag-form-control" id="input5" ng-model="personal.gender"
+                            ng-options="c.id as c.label for c in this_gender" ng-change="saveInfo(3)">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label mag-control-label pull-left">城市</label>
+
+                <div class="col-sm-4">
+                    <select class="form-control mag-form-control" id="input6" ng-model="personal.province"
+                            ng-options="c.province_id as c.province_name for c in this_province"
+                            style="width: 49%; display: inline-block"
+                            ng-change="getCitysAndSet(personal.province)">
+                    </select>
+                    <select class="form-control mag-form-control inline-block" id="input7" ng-model="personal.city"
+                            ng-options="c.city_id as c.city_name for c in this_city"
+                            style="width: 49%; display: inline-block; float: right" ng-change="saveInfo(4)">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label mag-control-label pull-left" style="text-align: right">收货地址</label>
+
+                <div class="col-sm-4" ng-show="addressList.length < 4">
+                    <a href="javascript: void(0)" style="position: relative; bottom: -7px; color: #43BB6F"
+                       ng-click="popnewaddress()">添加地址</a>
+                </div>
+            </div>
+
+            <div ng-repeat="address in addressList" class="row" ng-mouseenter="count=1" ng-mouseleave="count=0"
+                 ng-init="count=0">
+                <div class="col-md-10">
+                    <div class="mag-address_div col-sm-9">
+                        <div class="name col-sm-2">{{ address.name }}</div>
+                        <div class="phone col-sm-3">{{ address.phone }}</div>
+                        <div class="address col-sm-5">{{ address.address }}</div>
+                        <div class="col-sm-2">
+                            <a href="javascript:void(0)" ng-click="popmodifyaddress(address)">修改</a>
+                            <span> | </span>
+                            <a href="javascript:void(0)"
+                               ng-click="deleteAddress(address.addrID, address.default)">删除</a>
+                        </div>
+                    </div>
+                <span class="col-sm-2 mag-default-address" ng-show="address.default == 1">
+                    默认地址
+                </span>
+                    <a href="javascript: void(0)" class="col-sm-2 mag-set-default-address"
+                       ng-show="address.default != 1 && count"
+                       ng-click="setDefaultAddress(address.addrID)">
+                        设为默认
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<style>
+    .ghost {
+        display: block;
+        text-decoration: none;
+        color: #ffffff;
+        font-family: Arial;
+        font-size: large;
+        font-weight: bolder;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        padding: 0 10px 0 10px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        transition: 0.4s ease;
+        position: relative;
+    }
+
+    .ghost-round {
+        border-radius: 50%;
+        width: 62px;
+        height: 62px;
+        line-height: 62px;
+    }
+
+    .ghost:link {
+        border: 2px solid rgba(255, 255, 255, 1);
+        background-position: 140px center;
+        color: #ffffff
+    }
+
+    .ghost:visited, .ghost:hover, .ghost:active {
+        border: 2px solid #43bb6f;
+        background-position: 140px center;
+        color: #ffffff;
+    }
+
+    .ghost .line {
+        position: absolute;
+        background: none;
+        transition: 0.4s;
+    }
+
+    .ghost-silk:hover .line {
+        background: #ffffff;
+    }
+
+    .ghost .line-top {
+        width: 0px;
+        height: 2px;
+        top: -2px;
+        left: -110%;
+    }
+
+    .ghost-silk:hover .line-top {
+        width: 100%;
+        left: -2px;
+    }
+
+    .ghost .line-right {
+        width: 2px;
+        height: 0px;
+        right: -2px;
+        top: -110%;
+    }
+
+    .ghost-silk:hover .line-right {
+        height: 100%;
+        top: -2px;
+    }
+
+    .ghost .line-bottom {
+        width: 0px;
+        height: 2px;
+        bottom: -2px;
+        right: -110%;
+    }
+
+    .ghost-silk:hover .line-bottom {
+        width: 100%;
+        right: -2px;
+    }
+
+    .ghost .line-left {
+        width: 2px;
+        height: 0px;
+        left: -2px;
+        bottom: -110%;
+    }
+
+    .ghost-silk:hover .line-left {
+        height: 100%;
+        bottom: -2px;
+    }
+
+    .m_head {
+        height: 65px;
+        width: 65px;
+        border-radius: 50%;
+        position: absolute;
+        left: 10%;
+        top: 0%;
+    }
+
+    .m_head_content {
+        background: #43bb6f;
+        opacity: 0.6;
+        font-size: 16px;
+        padding-left: 15px;
+    }
+</style>
+>>>>>>> 393dd913295738b532d3e68ade2d567a447dafeb

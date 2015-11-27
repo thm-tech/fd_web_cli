@@ -1,0 +1,411 @@
+<div style="background-color: #FFFFFF;height:670px">
+    <div class="container-fluid" ng-controller="accountManagement">
+        <h4 style="color: #666666; font-size: 16px; top: 5px; position: relative;"><strong>{{ account }}</strong></h4>
+        <hr class="m_hr"/>
+        <div class="row">
+            <h4 class="pull-left" style="color: #666666; font-size: 16px">头像</h4>
+
+            <div class="col-sm-6">
+                <img class="m_head center-block" ng-src="{{ small_portrait_url }}" ng-mouseenter="is_show = true"/>
+                <a href="javascript:void(0)" class="ghost ghost-round m_head m_head_content" ng-show="is_show">
+                    修改
+                </a>
+                <input class="m_head" style="opacity: 0;" nv-file-select="" uploader="uploader" multiple="" type="file"
+                       ng-mouseenter="is_show = true" ng-mouseleave="is_show = false" style="z-index: 9;">
+
+                <div class="ghost ghost-round m_head m_head_content" ng-show="inupload"
+                     style="z-index: 10;line-height: 100%">
+                    <div class="loader-6" style="top: 8px;">wait</div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+
+        <div class="row color-999999" style="font-size: 16px"><h4>联系方式</h4></div>
+
+        <form class="form-horizontal" name="infoform" style="left: -30px;position: relative;">
+            <div class="form-group">
+                <label for="id_name" class="col-sm-2 control-label color-666666">姓名</label>
+
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <input type="TEXT" name="name" class="form-control" id="id_name" ng-model="name">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="save(1)"><i class="fa fa-floppy-o"></i>
+                        </button>
+                    </span>
+                    </div>
+                </div>
+                <span style="vertical-align: middle;color: #63ca89;" class="text-success" ng-show="resultinfo.yes == 1">{{ resultinfo.des }}</span>
+
+
+            </div>
+            <div class="form-group">
+                <label for="id_phone" class="col-sm-2 control-label color-666666">手机</label>
+
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <input type="TEXT" class="form-control" name="phone" id="id_phone" ng-model="phone"
+                               ng-pattern="/^\d{11}$/">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="save(2)"
+                                    ng-disabled="infoform.phone.$invalid"><i
+                                    class="fa fa-floppy-o"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <p ng-show="infoform.phone.$invalid" class="text-danger">填写11位手机号码</p>
+                </div>
+                <span style="vertical-align: middle;color: #63ca89;" class="text-success" ng-show="resultinfo.yes == 2">{{ resultinfo.des }}</span>
+
+            </div>
+            <div class="form-group">
+                <label for="id_email" class="col-sm-2 control-label color-666666">邮箱</label>
+
+
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <input type="email" class="form-control" name="email" id="id_email" ng-model="email"
+                               ng-pattern="/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="save(3)" ng-disabled="infoform.email.$invalid"><i class="fa fa-floppy-o"></i>
+                        </button>
+                    </span>
+                    </div>
+                    <p ng-show="infoform.email.$invalid" class="text-danger">填写您的常用邮箱(例如"immbear@163.com")</p>
+
+                </div>
+                <span style="vertical-align: middle;color: #63ca89;" class="text-success" ng-show="resultinfo.yes == 3">{{ resultinfo.des }}</span>
+            </div>
+            <div class="form-group">
+                <label for="id_qq" class="col-sm-2 control-label color-666666">QQ</label>
+
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <input type="TEXT" class="form-control" name="qq" id="id_qq" ng-model="qq">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="save(4)"><i class="fa fa-floppy-o"></i>
+                        </button>
+                    </span>
+                    </div>
+                </div>
+                <span style="vertical-align: middle;color: #63ca89;" class="text-success" ng-show="resultinfo.yes == 4">{{ resultinfo.des }}</span>
+            </div>
+        </form>
+
+        <div class="row color-999999" style="font-size: 16px"><h4>修改密码</h4></div>
+
+        <form class="form-horizontal" name="pwform" ng-submit="savepwd(pwform.$valid)"
+              style="left: -30px;position: relative;">
+            <div class="form-group">
+                <label for="id_old_password" class="col-sm-2 control-label color-666666">旧密码</label>
+
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" name="old_password" id="id_old_password"
+                           ng-model="old_password" required/>
+
+                    <p ng-show="pwform.old_password.$invalid && !pwform.old_password.$pristine" class="text-danger">
+                        必填项!</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_new_password" class="col-sm-2 control-label color-666666">新密码</label>
+
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" name="new_password" id="id_new_password"
+                           ng-model="new_password" ng-pattern="/^\w{6,}$/" required/>
+
+                    <p ng-show="pwform.new_password.$invalid && !pwform.new_password.$pristine" class="text-danger">
+                        请填写6位数以上密码</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_renew_password" class="col-sm-2 control-label color-666666">确认新密码</label>
+
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" name="renew_password" id="id_renew_password"
+                           ng-model="renew_password" ng-change="repwd()" required
+                           ng-disabled="pwform.new_password.$invalid"/>
+
+                    <p ng-show="(pwform.renew_password.$invalid || !pwd_equal) && !pwform.renew_password.$pristine"
+                       class="text-danger">
+                        请确认两次输入密码一致</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <button type="submit" class="btn btn-default m_save_button pull-right"
+                            ng-disabled="pwform.$invalid || !pwd_equal">
+                        保存
+                    </button>
+                    <span class="text-danger pull-right"
+                          style="padding-left:20px; padding-right: 20px; line-height: 30px;">{{ result }}</span>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<style>
+    .input-group .input-group-btn .btn {
+        height: 30px;
+        line-height: 10px;
+        color: #999999;
+    }
+
+    .m_save_button {
+        border-radius: 4px;
+        height: 30px;
+        width: 100px;
+        color: #FFFFFF;
+        background-color: #43bb6f !important;
+        padding: 0;
+    }
+
+    .m_save_button:hover {
+        color: #FFFFFF !important;
+    }
+
+    .row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+</style>
+
+
+<style>
+    /*.container-fluid {*/
+    /*margin-left: 15px;*/
+    /*margin-right: 15px;*/
+    /*}*/
+
+    .ghost {
+        display: block;
+        text-decoration: none;
+        color: #ffffff;
+        font-family: Arial;
+        font-size: large;
+        font-weight: bolder;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        padding: 0 10px 0 10px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        transition: 0.4s ease;
+        position: relative;
+    }
+
+    .ghost-round {
+        border-radius: 50%;
+        width: 62px;
+        height: 62px;
+        line-height: 62px;
+    }
+
+    .ghost:link {
+        border: 2px solid rgba(255, 255, 255, 1);
+        background-position: 140px center;
+        color: #ffffff
+    }
+
+    .ghost:visited, .ghost:hover, .ghost:active {
+        border: 2px solid #43bb6f;
+        background-position: 140px center;
+        color: #ffffff;
+    }
+
+    .ghost .line {
+        position: absolute;
+        background: none;
+        transition: 0.4s;
+    }
+
+    .ghost-silk:hover .line {
+        background: #ffffff;
+    }
+
+    .ghost .line-top {
+        width: 0px;
+        height: 2px;
+        top: -2px;
+        left: -110%;
+    }
+
+    .ghost-silk:hover .line-top {
+        width: 100%;
+        left: -2px;
+    }
+
+    .ghost .line-right {
+        width: 2px;
+        height: 0px;
+        right: -2px;
+        top: -110%;
+    }
+
+    .ghost-silk:hover .line-right {
+        height: 100%;
+        top: -2px;
+    }
+
+    .ghost .line-bottom {
+        width: 0px;
+        height: 2px;
+        bottom: -2px;
+        right: -110%;
+    }
+
+    .ghost-silk:hover .line-bottom {
+        width: 100%;
+        right: -2px;
+    }
+
+    .ghost .line-left {
+        width: 2px;
+        height: 0px;
+        left: -2px;
+        bottom: -110%;
+    }
+
+    .ghost-silk:hover .line-left {
+        height: 100%;
+        bottom: -2px;
+    }
+
+    .inline {
+        display: inline;
+    }
+
+    .modifya {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .input-group .input-group-addon a {
+        width: 100%;
+        height: 100%;
+    }
+
+    .usermsgdiv {
+        line-height: 3em;
+        background: #EFEFEF;
+        padding: 10px;
+    }
+
+    .usermsginput {
+        height: 20px;
+        width: 100px;
+    }
+
+    .m_head {
+        height: 65px;
+        width: 65px;
+        border-radius: 50%;
+        position: absolute;
+        left: 40%;
+        top: 0%;
+    }
+
+    .m_head_content {
+        background: #43bb6f;
+        opacity: 0.6;
+        font-size: 16px;
+        padding-left: 15px;
+    }
+
+    .form-control {
+        border-radius: 0;
+        height: 30px;
+        color: #333333;
+    }
+
+    .color-999999 {
+        color: #999999;
+    }
+
+    .color-666666 {
+        color: #666666;
+    }
+
+    .form-control:focus {
+        border-color: #43bb6f;
+    }
+
+    .control-label {
+        font-size: 16px;
+        font-weight: normal;
+    }
+</style>
+
+<style>
+    .load-container {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        width: 65px;
+        height: 65px;
+        float: left;
+        position: relative;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .loader-6 {
+        font-size: 20px;
+        text-indent: -9999em;
+        overflow: hidden;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        margin: 33% auto;
+        position: relative;
+        -webkit-animation: load6 1.7s infinite ease;
+        animation: load6 1.7s infinite ease;
+    }
+
+    @-webkit-keyframes load6 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+        }
+        5%,
+        95% {
+            box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+        }
+        30% {
+            box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.51em -0.66em 0 -0.42em #ffffff, -0.75em -0.36em 0 -0.44em #ffffff, -0.83em -0.03em 0 -0.46em #ffffff, -0.81em 0.21em 0 -0.477em #ffffff;
+        }
+        55% {
+            box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.29em -0.78em 0 -0.42em #ffffff, -0.43em -0.72em 0 -0.44em #ffffff, -0.52em -0.65em 0 -0.46em #ffffff, -0.57em -0.61em 0 -0.477em #ffffff;
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+            box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+        }
+    }
+
+    @keyframes load6 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+        }
+        5%,
+        95% {
+            box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+        }
+        30% {
+            box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.51em -0.66em 0 -0.42em #ffffff, -0.75em -0.36em 0 -0.44em #ffffff, -0.83em -0.03em 0 -0.46em #ffffff, -0.81em 0.21em 0 -0.477em #ffffff;
+        }
+        55% {
+            box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.29em -0.78em 0 -0.42em #ffffff, -0.43em -0.72em 0 -0.44em #ffffff, -0.52em -0.65em 0 -0.46em #ffffff, -0.57em -0.61em 0 -0.477em #ffffff;
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+            box-shadow: -0.11em -0.83em 0 -0.4em #ffffff, -0.11em -0.83em 0 -0.42em #ffffff, -0.11em -0.83em 0 -0.44em #ffffff, -0.11em -0.83em 0 -0.46em #ffffff, -0.11em -0.83em 0 -0.477em #ffffff;
+        }
+    }
+</style>

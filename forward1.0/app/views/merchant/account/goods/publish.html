@@ -1,0 +1,23 @@
+
+<div class="goods-publish" ng-controller="goodsPublish">
+    <div>
+        <form role="form" name="goodsForm" id="goodsForm" class="form-horizontal" ng-submit="goods.postComm()" novalidate>
+            <div class="pub-group">
+                <label class="input-title" >商品类别</label>
+                <div class="category-sel">
+                    <select class="form-control pub-control"  ng-model="goods.category" ng-change="goods.categoryChange()" ng-options="category.name for category in goods._categoryInfo">
+                    </select>
+                </div>
+                <div class="category-sel">
+                    <select class="form-control pub-control" ng-model="goods.subcategory" ng-change="goods.categoryChange()"  ng-options="subcategory.name for subcategory in goods.category.son">
+                    </select>
+                </div>
+            </div>
+            <div class="category-cnt" ng-include="goods.templateUrl"></div>
+            <div style="margin-top:15px;margin-left:450px;">
+                <button type="button" class="cancel-btn" ng-click="goods.cancelPublish()" >取消</button>
+                <button type="submit" class="submit-btn" ng-disabled="goodsForm.$invalid || !goods.legalPrice || !goods.priceRight || !goods.proPriceRight || !goods.legalProPrice || goods.basicInfo.imgList.length == 0">发布</button>
+            </div>
+      </form>
+    </div>
+</div>

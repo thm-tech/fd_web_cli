@@ -1,0 +1,92 @@
+﻿
+<div class="msg_ctr" ng-controller="messageCtrl">
+
+<div ng-show="nomsg">
+<p class="msg_title">通知消息</p>
+<p class="tips">您没有新消息</p>
+</div>
+<div ng-if="msgshow">
+
+<p class="msg_title">通知消息</p>
+<ul class="msg_ul" >
+<li ng-repeat="msg in msglist" ng-switch on="msg.c">
+<!--系统消息--><!--
+	<div ng-switch-when="SEND_SYSTEM" class="msg_list">
+		<div class="msg_picdiv">
+		<img ng-src="{{msg.arguments.invitor_portrait}}@110w_110h_1e_0l_1c" class="msg_pic"></img>
+		</div>
+		<div class="msg_text">
+			<p>
+			<span class="msg_name">{{msg.arguments.invitor_name}} 喵喵熊团队</span>
+			<span class="msg_time">{{msg.time*1000|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+			</p>
+			<p class="msg_textbelowe" ng-bind-html="msg.body">
+			 
+			</p>	
+		</div>
+	</div>	-->
+<!--系统消息--> 
+<!--粉店消息-->
+	<div ng-switch-when="SEND_FANS_M" class="msg_list">	
+		<div class="msg_picdiv">
+		<img ng-src="{{msg.pic}}@110w_110h_1e_0l_1c" ng-click="user.openshopmsg(msg.body2,msg.name,msg.shop,msg.time,$index)" class="msg_pic"></img>
+		</div>
+		<div class="msg_text">
+			<p>
+			<span class="msg_name" ng-click="user.openshopmsg(msg.body2,msg.name,msg.shop,msg.time,$index)" onmouseover="this.style.color='#43bb6f';" onmouseout="this.style.color='#333333';">{{msg.name}}</span>
+			<span class="msg_time">{{msg.time*1000|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+			</p>
+			<p class="msg_textbelowe" ng-bind-html="msg.body1">
+		
+			</p>
+		</div>
+	</div>
+<!--粉店消息-->
+<!--请求添加好友消息-->
+	<div ng-switch-when="ADD_FRIEND" class="msg_list">
+		<div class="msg_picdiv" >
+		<img ng-src="{{msg.arguments.invitor_portrait}}@110w_110h_1e_0l_1c" class="msg_pic"></img>
+		</div>
+		<div class="msg_text">
+			<p>
+			<span class="msg_name">{{msg.arguments.invitor_name}}</span>
+			<span class="msg_time">{{msg.time*1000|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+			</p>
+			<p class="msg_textbelowe" >
+			<span ng-hide="msg.add1">请求加你为好友</span>
+			<span ng-show="msg.add2">你们已经成为好友啦</span>
+			<span ng-show="msg.add3">你拒绝了对方的好友请求</span>
+			</p>
+			<p>
+				<span class="msg_buttons" ng-hide="msg.buttons">
+				<button class="msg_aggree" ng-click="aggree(msg.invitor,$index)" >同意</button>
+				<button class="msg_refuse" ng-click="refuse(msg.invitor,$index)" >拒绝</button>
+				</span>
+			</p>
+		</div>
+	</div>
+<!--请求添加好友消息-->
+<!--好友接受返回消息-->
+	<div ng-switch-when="CON_FRIEND" class="msg_list">	
+		<div class="msg_picdiv">
+		<img ng-src="{{msg.arguments.receivor_portrait}}@110w_110h_1e_0l_1c" class="msg_pic"></img>
+		</div>
+		<div class="msg_text">
+			<p>
+			<span class="msg_name">{{msg.arguments.receivor_name}}</span>
+			<span class="msg_time">{{msg.time*1000|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+			</p>
+			<p class="msg_textbelowe">
+			<span ng-if="msg.accept=='1'">对方同意了你的好友申请</span>
+			<span ng-if="msg.accept=='0'">对方拒绝了你的好友申请</span>
+			</p>
+		</div>
+	</div>
+<!--好友接受返回消息-->
+</li>
+</ul>
+</div>
+<div ng-if="shopmsgshow" ng-include="'views/customer/account/message/shopmsg/shopmsg.html'"></div>
+
+
+</div>
