@@ -206,18 +206,21 @@ define(['angular', 'app', 'services/checkcookie'], function(angular, app) {
                 $scope.activity = msg;
                 $scope.show.should_i_show = 2;
 
+                var conts = $scope.conts = JSON.parse(msg.act_content);
+                console.log(conts)
+
                 // width adaptive begin
-                m_info_width = $(".m_table").width() - 42;
-                var html = $scope.activity.act_content;
-                var re = new RegExp("height:(.*?)px; width:(.*?)px", ["g"]);
-                while (res = re.exec(html)) {
-                    if (res[2] > m_info_width) {
-                        var nw = m_info_width;
-                        var nh = res[1] * m_info_width / res[2];
-                        html = html.replace(res[0], "height:" + String(nh) + "px; width:" + String(nw) + "px")
-                    }
-                }
-                $scope.activity_html = $sce.trustAsHtml(html);
+                // m_info_width = $(".m_table").width() - 42;
+                // var html = $scope.activity.act_content;
+                // var re = new RegExp("height:(.*?)px; width:(.*?)px", ["g"]);
+                // while (res = re.exec(html)) {
+                //     if (res[2] > m_info_width) {
+                //         var nw = m_info_width;
+                //         var nh = res[1] * m_info_width / res[2];
+                //         html = html.replace(res[0], "height:" + String(nh) + "px; width:" + String(nw) + "px")
+                //     }
+                // }
+                // $scope.activity_html = $sce.trustAsHtml(html);
                 // end
             });
 
@@ -234,8 +237,8 @@ define(['angular', 'app', 'services/checkcookie'], function(angular, app) {
     ]);
 
 
-    app.controller('postActivity', ['$scope', '$http', '$rootScope', '$stateParams', '$modal', 'hascookie',
-        function($scope, $http, $rootScope, $stateParams, $modal, hascookie) {
+    app.controller('postActivity', ['$scope', '$http', '$rootScope', '$stateParams', '$modal', 'hascookie', 'FileUploader',
+        function($scope, $http, $rootScope, $stateParams, $modal, hascookie, FileUploader) {
             var shop_id = $rootScope.globals.shop_id;
             var host = $rootScope.proxyUrl;
             var msghost = $rootScope.chatProxyUrl;
@@ -245,6 +248,33 @@ define(['angular', 'app', 'services/checkcookie'], function(angular, app) {
             $scope.end_date = $scope.begin_date;
             $scope.minDate = $scope.minDate ? null : new Date();
 
+            $scope.conts = {
+                "index": 0,
+                "sections": [
+                    [1, ""],
+                ]
+            }
+
+            $scope.sectionModelList = []
+
+            $scope.newTextSection = function() {
+                $scope.conts["index"] += 1;
+                $scope.conts["sections"].push([1, ""]);
+            }
+
+            $scope.openUploadDialog = function() {
+                $("#id_upload").trigger("click");
+            };
+
+            $scope.newImgSection = function(url) {
+                $scope.conts["index"] += 1;
+                $scope.conts["sections"].push([2, url]);
+            };
+
+            $scope.removeSection = function(index) {
+                $scope.conts["index"] -= 1;
+                $scope.conts["sections"].splice(index, index);
+            }
 
             $scope.return_to_list = function() {
                 $scope.show.should_i_show = 1;
@@ -339,7 +369,7 @@ define(['angular', 'app', 'services/checkcookie'], function(angular, app) {
                         url: host + "/shop/" + shop_id + "/activities",
                         data: {
                             'act_title': $scope.act_title,
-                            'act_content': $scope.act_content + " ",
+                            'act_content': JSON.stringify($scope.conts),
                             'begin_time': changeDateToString($scope.begin_date),
                             'end_time': changeDateToString($scope.end_date)
                         },
@@ -367,7 +397,7 @@ define(['angular', 'app', 'services/checkcookie'], function(angular, app) {
                                             method: "POST",
                                             data: {
                                                 'act_title': $scope.act_title,
-                                                'act_content': $scope.act_content + " ",
+                                                'act_content': JSON.stringify($scope.conts),
                                                 'begin_time': changeDateToString($scope.begin_date),
                                                 'end_time': changeDateToString($scope.end_date)
                                             }
@@ -380,7 +410,7 @@ define(['angular', 'app', 'services/checkcookie'], function(angular, app) {
                                                 "userids": ids,
                                                 "message": JSON.stringify({
                                                     'act_title': $scope.act_title,
-                                                    'act_content': $scope.act_content + " ",
+                                                    'act_content': JSON.stringify($scope.conts),
                                                     'begin_time': changeDateToString($scope.begin_date),
                                                     'end_time': changeDateToString($scope.end_date)
                                                 })
@@ -422,6 +452,28 @@ define(['angular', 'app', 'services/checkcookie'], function(angular, app) {
                 filebrowserImageUploadUrl: "http://" + $rootScope._chatProxyUrl + '/ck/file/uploader'
             };
 
+
+
+            var uploader = $scope.uploader = new FileUploader({
+                url: msghost + '/file/uploader',
+                autoUpload: true
+            });
+
+            uploader.filters.push({
+                name: 'imageFilter',
+                fn: function(item, options) {
+                    var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                    return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+                }
+            });
+
+            uploader.onAfterAddingFile = function(fileItem) {};
+
+            uploader._onSuccessItem = function(fileItem, resData, status, headers) {
+                $scope.newImgSection(resData.url);
+            };
+
+            uploader.onCompleteAll = function() {};
 
         }
     ])

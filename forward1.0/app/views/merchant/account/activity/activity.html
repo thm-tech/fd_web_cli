@@ -4,32 +4,32 @@
             <h4 class="m_server_head">优惠活动</h4>
             <button class="pull-right nav-btn" ng-click="show.should_i_show = 3">发布活动</button>
         </div>
-        <hr class="m_hr"/>
+        <hr class="m_hr" />
         <div ng-show="show.should_i_show == 1" class="">
             <table class="table table-hover fd-table">
                 <thead class="m_table_head">
-                <tr>
-                    <th style="width: 10%;">编号</th>
-                    <th style="width: 40%;">活动主题</th>
-                    <th style="width: 35%;">活动时间</th>
-                    <th style="width: 15%;">操作</th>
-                </tr>
+                    <tr>
+                        <th style="width: 10%;">编号</th>
+                        <th style="width: 40%;">活动主题</th>
+                        <th style="width: 35%;">活动时间</th>
+                        <th style="width: 15%;">操作</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr style="height: 45px" ng-repeat="activity in activities">
-                    <td>{{ activity.index }}</td>
-                    <td>{{ activity.act_title }}</td>
-                    <td ng-if="getdate(activity.end_time) < now">已过期</td>
-                    <td ng-if="getdate(activity.end_time) >= now">{{ activity.begin_time.slice(0,10) }} - {{ activity.end_time.slice(0,10) }}</td>
-                    <td>
-                        <a href="javascript:void(0)" class="m_table_a" ng-click="drop_down(activity)" title="活动详情">
-                            <span class="color-63ca89 glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-                        </a>
-                        <a href="javascript:void(0)" ng-click="delect(activity.act_id)" class="m_table_a" title="删除活动">
-                            <span class="color-63ca89 glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        </a>
-                    </td>
-                </tr>
+                    <tr style="height: 45px" ng-repeat="activity in activities">
+                        <td>{{ activity.index }}</td>
+                        <td>{{ activity.act_title }}</td>
+                        <td ng-if="getdate(activity.end_time) < now">已过期</td>
+                        <td ng-if="getdate(activity.end_time) >= now">{{ activity.begin_time.slice(0,10) }} - {{ activity.end_time.slice(0,10) }}</td>
+                        <td>
+                            <a href="javascript:void(0)" class="m_table_a" ng-click="drop_down(activity)" title="活动详情">
+                                <span class="color-63ca89 glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                            </a>
+                            <a href="javascript:void(0)" ng-click="delect(activity.act_id)" class="m_table_a" title="删除活动">
+                                <span class="color-63ca89 glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="row" style="clear:both;position: absolute;width: 720px;top: 650px;">
@@ -60,12 +60,9 @@
                     </ul>
 
                     <div class="inline-block" style="color: #c9c9c9">
-                        共<span style="color: #55D484">{{ page.page_num }}</span>页
-                        &nbsp;&nbsp;&nbsp;&nbsp;第
-                        <input type="text" class="inline-block"
-                               style="display: inline; width:33px; height:33px; color: #c9c9c9;"
-                               ng-model="in_index"/>
-                        页
+                        共
+                        <span style="color: #55D484">{{ page.page_num }}</span>页 &nbsp;&nbsp;&nbsp;&nbsp;第
+                        <input type="text" class="inline-block" style="display: inline; width:33px; height:33px; color: #c9c9c9;" ng-model="in_index" /> 页
                         <button type="button" ng-click="init(in_index)" class="m_button">确定</button>
                     </div>
                 </div>
@@ -75,28 +72,27 @@
         <div ng-controller="activityInfo" ng-show="show.should_i_show == 2" class="m_table m_fuck_div" style="margin-bottom: 20px;">
             <table class="table table-striped table-hover fd-table m_no_border">
                 <thead class="m_table_head">
-                <tr>
-                    <th style="width: 10%;">编号</th>
-                    <th style="width: 40%;">活动主题</th>
-                    <th style="width: 35%;">活动时间</th>
-                    <th style="width: 15%;">操作</th>
-                </tr>
+                    <tr>
+                        <th style="width: 10%;">编号</th>
+                        <th style="width: 40%;">活动主题</th>
+                        <th style="width: 35%;">活动时间</th>
+                        <th style="width: 15%;">操作</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{ activity.index }}</td>
-                    <td>{{ activity.act_title }}</td>
-                    <td>{{ activity.begin_time.slice(0,10) }} - {{ activity.end_time.slice(0,10) }}</td>
-                    <td>
-                        <a href="javascript:void(0)" class="m_table_a" style="color: #ff3300;" ng-click="drop_up()"
-                           title="返回">
-                            <span class="glyphicon glyphicon-menu-up color-f96b3a" aria-hidden="true"></span>
-                        </a>
-                        <a href="javascript:void(0)" ng-click="delect(activity.act_id)" class="m_table_a" title="删除活动">
-                            <span class="color-63ca89 glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        </a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ activity.index }}</td>
+                        <td>{{ activity.act_title }}</td>
+                        <td>{{ activity.begin_time.slice(0,10) }} - {{ activity.end_time.slice(0,10) }}</td>
+                        <td>
+                            <a href="javascript:void(0)" class="m_table_a" style="color: #ff3300;" ng-click="drop_up()" title="返回">
+                                <span class="glyphicon glyphicon-menu-up color-f96b3a" aria-hidden="true"></span>
+                            </a>
+                            <a href="javascript:void(0)" ng-click="delect(activity.act_id)" class="m_table_a" title="删除活动">
+                                <span class="color-63ca89 glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="m_info" style="color: #666666;overflow: auto;">
@@ -104,7 +100,12 @@
                 <br/>
                 <br/>
 
-                <div ng-bind-html="activity_html"></div>
+                <!-- <div ng-bind-html="activity_html"></div> -->
+                <div ng-repeat="s in conts.sections">
+                    <p ng-if="s[0] == 1">{{ s[1] }}</p>
+                    <img ng-if="s[0] == 2" ng-src="{{ s[1] }}"  style="max-width: 100%"/>
+                </div>
+
                 <br/>
                 <br/>
 
@@ -119,19 +120,30 @@
                     <label for="id_active_title" class="col-sm-2 control-label color-666666">活动标题</label>
 
                     <div class="col-sm-10">
-                        <input type="TEXT" class="form-control" id="id_active_title" ng-model="act_title"
-                               placeholder="Title..."
-                               required>
+                        <input type="TEXT" class="form-control" id="id_active_title" ng-model="act_title" placeholder="Title..." required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="id_active_content" class="col-sm-2 control-label color-666666">活动内容</label>
 
                     <div class="col-sm-10">
-                        <!--<textarea rows=6 class="form-control" id="id_active_content" ng-model="act_content" -->
-                        <!--placeholder="Content..." required></textarea>-->
-                <textarea ckeditor="editorOptions" name="editor" ng-model="act_content" id="id_active_content"
-                          required></textarea>
+                        <div ng-repeat="c in conts.sections" style="position: relative">
+                            <textarea ng-if="c[0] == 1" name="editor" style="border: 1px solid #ccc;width: 100%;height:100px" ng-model="c[1]"></textarea>
+                            <img ng-if="c[0] == 2" ng-src="{{ c[1] }}" alt="" style="max-width: 100%" />
+                            <a ng-if="$index != 0" class="trash-icon" href="javascript:void(0)" ng-click="removeSection($index)" style="top: 0px; right: 0px"></a>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6" style="text-align: center">
+                                <a href="javascript: void(0)" ng-click="newTextSection()" style="color: #55D484">增加段落</a>
+                                <!-- <i class="fa fa-file-text-o"></i> -->
+                            </div>
+                            <div class="col-md-6" style="text-align: center">
+                                <a href="javascript: void(0)" ng-click="openUploadDialog()" style="color: #55D484">增加图片</a>
+                                <input id="id_upload" nv-file-select="" uploader="uploader" multiple="" type="file" style="display:none">
+                                <!-- <i class="fa fa-picture-o"></i> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -140,19 +152,11 @@
                     <div class="col-sm-10">
                         <div class="col-sm-5" style="padding-left:0;padding-right:0;width: 46%">
                             <p class="input-group">
-                                <input type="TEXT" class="form-control form-control-auto_height" datepicker-popup
-                                       style="height: 34px"
-                                       current-text="今天"
-                                       clear-text="清空"
-                                       close-text="关闭"
-                                       ng-model="begin_date"
-                                       is-open="begin_opened"
-                                       min-date="minDate" datepicker-options="dateOptions"
-                                       ng-required="true" close-text="Close" required/>
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="begin_open($event)"><i
-                                    class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
+                                <input type="TEXT" class="form-control form-control-auto_height" datepicker-popup style="height: 34px" current-text="今天" clear-text="清空" close-text="关闭" ng-model="begin_date" is-open="begin_opened" min-date="minDate" datepicker-options="dateOptions" ng-required="true"
+                                close-text="Close" required/>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="begin_open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
                             </p>
                         </div>
                         <div style="display: inline">
@@ -160,33 +164,22 @@
                         </div>
                         <div class="col-sm-5 pull-right" style="padding-left:0;padding-right:0;width: 46%">
                             <p class="input-group">
-                                <input type="TEXT" class="form-control form-control-auto_height" datepicker-popup
-                                       style="height: 34px"
-                                       current-text="今天"
-                                       clear-text="清空"
-                                       close-text="关闭"
-                                       ng-model="end_date"
-                                       is-open="end_opened"
-                                       min-date="begin_date" datepicker-options="dateOptions"
-                                       ng-required="true" close-text="Close" required/>
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="end_open($event)"><i
-                                    class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
+                                <input type="TEXT" class="form-control form-control-auto_height" datepicker-popup style="height: 34px" current-text="今天" clear-text="清空" close-text="关闭" ng-model="end_date" is-open="end_opened" min-date="begin_date" datepicker-options="dateOptions" ng-required="true"
+                                close-text="Close" required/>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="end_open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div>
-                        <button type="submit" class="pull-right nav-btn m_button_send"
-                                style="background-color: #55D484; border: 1px solid #55D484;"
-                                ng-disabled="form.$invalid">发布
+                        <button type="submit" class="pull-right nav-btn m_button_send" style="background-color: #55D484; border: 1px solid #55D484;" ng-disabled="form.$invalid">发布
                         </button>
-                        <button type="button" class="pull-right cancel-btn"
-                                ng-click="return_to_list()" style="position:relative; top: 10px">取消
-                            </button>
-                            <span class="pull-right text-danger" style="position: relative; top: 13px; margin-right: 20px;">{{ returnInfo }}</span>
+                        <button type="button" class="pull-right cancel-btn" ng-click="return_to_list()" style="position:relative; top: 10px">取消
+                        </button>
+                        <span class="pull-right text-danger" style="position: relative; top: 13px; margin-right: 20px;">{{ returnInfo }}</span>
                     </div>
                 </div>
             </form>
