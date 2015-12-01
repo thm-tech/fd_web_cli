@@ -272,8 +272,10 @@ define(['angular', 'app', 'services/checkcookie'], function(angular, app) {
             };
 
             $scope.removeSection = function(index) {
+                console.log('removeSection(' + String(index) + ')')
                 $scope.conts["index"] -= 1;
-                $scope.conts["sections"].splice(index, index);
+                $scope.conts["sections"].splice(index, 1);
+                console.log($scope.conts.sections)
             }
 
             $scope.return_to_list = function() {

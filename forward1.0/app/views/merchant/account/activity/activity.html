@@ -130,7 +130,7 @@
                         <div ng-repeat="c in conts.sections" style="position: relative">
                             <textarea ng-if="c[0] == 1" name="editor" style="border: 1px solid #ccc;width: 100%;height:100px" ng-model="c[1]"></textarea>
                             <img ng-if="c[0] == 2" ng-src="{{ c[1] }}" alt="" style="max-width: 100%" />
-                            <a ng-if="$index != 0" class="trash-icon" href="javascript:void(0)" ng-click="removeSection($index)" style="top: 0px; right: 0px"></a>
+                            <a ng-if="conts.sections.length > 1" class="trash-icon" href="javascript:void(0)" ng-click="removeSection($index)" style="top: 0px; right: 0px"></a>
                         </div>
 
                         <div class="row">
